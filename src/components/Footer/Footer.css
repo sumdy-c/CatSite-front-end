@@ -1,0 +1,35 @@
+.wrapperBottom {
+  display: flex;
+  margin: 30px 0px 0px 0px;
+  padding: 20px;
+  height: 200px;
+  width: -webkit-fill-available;
+  position: static;
+  justify-content: space-around;
+  flex-direction: column;
+  align-content: space-around;
+  align-items: flex-end;
+  flex-wrap: wrap;
+}
+
+.footerInform {
+  display: flex;
+  flex-direction: column;
+  align-content: flex-end;
+  flex-wrap: wrap;
+  /* justify-content: space-evenly; */
+  align-items: flex-end;
+  padding-right: 61px;
+  padding-top: 29px;
+  width: max-content;
+}
+
+.imgSettingFooter {
+  width: 200px;
+}
+
+.imgFullSetting {
+  display: inline-flex;
+  flex-direction: column-reverse;
+  flex-wrap: wrap;
+}
