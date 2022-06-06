@@ -1,0 +1,11 @@
+.fieldWidth {
+  width: -webkit-fill-available;
+}
+.textarea {
+  margin-top: 30px;
+}
+
+.modalStyle {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
