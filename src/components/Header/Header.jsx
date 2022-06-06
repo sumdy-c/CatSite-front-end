@@ -1,4 +1,4 @@
-import "./Header.css";
+import style from "./Header.module.css";
 import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
 import * as React from "react";
@@ -20,11 +20,11 @@ export default function Header({ isOpen, setBooked }) {
 
   return (
     <>
-      <Paper elevation={8} className="wrapperTop">
-        <Button size="large" className="btnAdd" onClick={handleClickOpen}>
+      <Paper elevation={8} className={`${style.wrapperTop}`}>
+        <Button size="large" onClick={handleClickOpen}>
           Добавить своего котика!
         </Button>
-        <span className="titleName"> 🆃🅷🅴 | 🅼🅴🅾🆆 | 🆂🅷🅾🅿 </span>
+        <span className={`${style.titleName}`}> 🆃🅷🅴 | 🅼🅴🅾🆆 | 🆂🅷🅾🅿 </span>
         <ButtonGroup disableElevation variant="text">
           <Button onClick={VisibleFreeBookedCat}>
             Досупные для бронирования

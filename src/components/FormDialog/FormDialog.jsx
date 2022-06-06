@@ -1,5 +1,5 @@
 import * as React from "react";
-import "./FormDialog.css";
+import style from "./FormDialog.module.css";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
@@ -15,7 +15,6 @@ import { TextareaAutosize } from "@mui/material";
 import InputLabel from "@mui/material/InputLabel";
 import UploadPhoto from "./UploadPhoto.jsx";
 import { breedData } from "../../constants/breedData";
-
 import { colorData } from "../../constants/colorData";
 
 export default function FormDialog({
@@ -164,7 +163,7 @@ export default function FormDialog({
           <TextField
             error={ValidSetting.Name}
             id="NameAddExamination"
-            className="tabs"
+            className={`${style.modalStyle}`}
             autoFocus
             helperText={
               ValidSetting.Name
@@ -180,8 +179,8 @@ export default function FormDialog({
             aria-describedby="component-error-text"
           />
 
-          <Box sx={{ minWidth: 90 }} className="tabs">
-            <FormControl variant="standard" className="fieldList">
+          <Box sx={{ minWidth: 90 }} className={`${style.modalStyle}`}>
+            <FormControl variant="standard" className={`${style.fieldWidth}`}>
               <InputLabel id="demo-simple-select-label">
                 Укажите породу котика!
               </InputLabel>
@@ -210,7 +209,7 @@ export default function FormDialog({
                 ? "Только числа! Не более 25 лет!!! Обязательно для заполнения!"
                 : ""
             }
-            className="tabs"
+            className={`${style.modalStyle}`}
             autoFocus
             margin="dense"
             label="Возраст котика"
@@ -221,7 +220,7 @@ export default function FormDialog({
             id="AgeAddExamination"
           />
           <Box sx={{ minWidth: 120 }}>
-            <FormControl variant="standard" className="fieldList">
+            <FormControl variant="standard" className={`${style.fieldWidth}`}>
               <InputLabel id="demo-simple-select-label">
                 Укажите цвет котика
               </InputLabel>
@@ -252,7 +251,7 @@ export default function FormDialog({
                 : ""
             }
             id="PriceAddExamination"
-            className="tabs"
+            className={`${style.modalStyle}`}
             autoFocus
             margin="dense"
             label="Стоймость аренды котика"
@@ -263,7 +262,7 @@ export default function FormDialog({
           />
           <UploadPhoto setImg={setImg} sendfile={sendfile} img={img} />
           <TextareaAutosize
-            className="textarea"
+            className={`${style.textarea}`}
             id="TextAddExamination"
             aria-label="ДопИнфКот"
             onChange={handleChangeInfo}

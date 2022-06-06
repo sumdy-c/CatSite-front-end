@@ -1,3 +1,8 @@
+.main__block {
+  height: 100%;
+  width: 100%;
+}
+
 .backgr {
   background-image: url("./backFon.jpg");
 }

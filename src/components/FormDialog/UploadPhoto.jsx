@@ -2,7 +2,7 @@ import * as React from "react";
 import { styled } from "@mui/material/styles";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
-import "./UploadPhoto.css";
+import style from "./UploadPhoto.module.css";
 
 const Input = styled("input")({
   display: "none",
@@ -11,7 +11,7 @@ const Input = styled("input")({
 const UploadPhoto = ({ setImg, sendfile, img }) => {
   return (
     <Stack
-      className="uploadbtn"
+      className={`${style.btn}`}
       direction="row"
       alignItems="center"
       spacing={2}

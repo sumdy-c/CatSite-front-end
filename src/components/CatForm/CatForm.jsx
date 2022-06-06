@@ -1,5 +1,5 @@
 import * as React from "react";
-import "./CatForm.css";
+import style from "./CatForm.module.css";
 import { styled } from "@mui/material/styles";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
@@ -14,7 +14,6 @@ import Typography from "@mui/material/Typography";
 import { red } from "@mui/material/colors";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-import Grid from "@mui/material/Grid";
 import { Container } from "@mui/material";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
 import Grow from "@mui/material/Grow";
@@ -59,6 +58,7 @@ export default function CatForm({
   toggleBooked,
   setTrackerEditID,
   setOpens,
+  loader,
 }) {
   const [expanded, setExpanded] = React.useState(false);
   const handleExpandClick = () => {
@@ -136,121 +136,119 @@ export default function CatForm({
 
   return (
     <>
-      <Grid item xs={4}>
-        <Card sx={{ maxWidth: 345 }} id={`${id}`}>
-          <CardHeader
-            avatar={
-              <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-                Кот
-              </Avatar>
-            }
-            action={
-              <Stack direction="row" spacing={2}>
-                <div>
-                  <MoreVertIcon
-                    ref={anchorRef}
-                    id="composition-button"
-                    aria-controls={open ? "composition-menu" : undefined}
-                    aria-expanded={open ? "true" : undefined}
-                    aria-haspopup="true"
-                    onClick={handleToggle}
-                  >
-                    Меню
-                  </MoreVertIcon>
+      <Card sx={{ maxWidth: 345 }} id={`${id}`}>
+        <CardHeader
+          avatar={
+            <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
+              Кот
+            </Avatar>
+          }
+          action={
+            <Stack direction="row" spacing={2}>
+              <div>
+                <MoreVertIcon
+                  ref={anchorRef}
+                  id="composition-button"
+                  aria-controls={open ? "composition-menu" : undefined}
+                  aria-expanded={open ? "true" : undefined}
+                  aria-haspopup="true"
+                  onClick={handleToggle}
+                >
+                  Меню
+                </MoreVertIcon>
 
-                  <Popper
-                    open={open}
-                    anchorEl={anchorRef.current}
-                    role={undefined}
-                    placement="bottom-start"
-                    transition
-                    disablePortal
-                  >
-                    {({ TransitionProps, placement }) => (
-                      <Grow
-                        {...TransitionProps}
-                        style={{
-                          transformOrigin:
-                            placement === "bottom-start"
-                              ? "left top"
-                              : "left bottom",
-                        }}
-                      >
-                        <Paper>
-                          <ClickAwayListener onClickAway={handleClose}>
-                            <MenuList
-                              autoFocusItem={open}
-                              id="composition-menu"
-                              aria-labelledby="composition-button"
-                              onKeyDown={handleListKeyDown}
-                            >
-                              <MenuItem onClick={FormCreateOpen}>
-                                Редактировать котика
-                              </MenuItem>
-                              <MenuItem onClick={handleDeleteCat}>
-                                Удалить котика
-                              </MenuItem>
-                            </MenuList>
-                          </ClickAwayListener>
-                        </Paper>
-                      </Grow>
-                    )}
-                  </Popper>
-                </div>
-              </Stack>
-            }
-            title={`${name}`}
-            subheader={`${age} год`}
+                <Popper
+                  open={open}
+                  anchorEl={anchorRef.current}
+                  role={undefined}
+                  placement="bottom-start"
+                  transition
+                  disablePortal
+                >
+                  {({ TransitionProps, placement }) => (
+                    <Grow
+                      {...TransitionProps}
+                      style={{
+                        transformOrigin:
+                          placement === "bottom-start"
+                            ? "left top"
+                            : "left bottom",
+                      }}
+                    >
+                      <Paper>
+                        <ClickAwayListener onClickAway={handleClose}>
+                          <MenuList
+                            autoFocusItem={open}
+                            id="composition-menu"
+                            aria-labelledby="composition-button"
+                            onKeyDown={handleListKeyDown}
+                          >
+                            <MenuItem onClick={FormCreateOpen}>
+                              Редактировать котика
+                            </MenuItem>
+                            <MenuItem onClick={handleDeleteCat}>
+                              Удалить котика
+                            </MenuItem>
+                          </MenuList>
+                        </ClickAwayListener>
+                      </Paper>
+                    </Grow>
+                  )}
+                </Popper>
+              </div>
+            </Stack>
+          }
+          title={`${name}`}
+          subheader={`${age} год`}
+        />
+        <CardMedia
+          className={`${style.imgstyle}`}
+          component="img"
+          height="194"
+          image={photo}
+          alt="Нет фото("
+        />
+        <CardContent>
+          <Typography variant="body2" color="text.secondary">
+            {`Порода - ${breed}`}
+            <br />
+            {`Цвет - ${CatColor}`}
+            <br />
+            {`Стоймость часа - ${price} рублей`}
+          </Typography>
+        </CardContent>
+        <CardActions disableSpacing>
+          <Button variant="text" onClick={handleClickBooked(SlideTransition)}>
+            {checked ? <p>Снять бронь!</p> : <p>Забронировать котика!</p>}
+          </Button>
+          <Checkbox
+            id="checkbox1"
+            icon={<BookmarkBorderIcon />}
+            checkedIcon={<BookmarkIcon />}
+            checked={checked}
           />
-          <CardMedia
-            className="imgstyle"
-            component="img"
-            height="194"
-            image={photo}
-            alt="Нет фото("
-          />
+          <ExpandMore
+            expand={expanded}
+            onClick={handleExpandClick}
+            aria-expanded={expanded}
+            aria-label="show more"
+          >
+            <ExpandMoreIcon />
+          </ExpandMore>
+        </CardActions>
+
+        <Collapse in={expanded} timeout="auto" unmountOnExit>
           <CardContent>
-            <Typography variant="body2" color="text.secondary">
-              {`Порода - ${breed}`}
-              <br />
-              {`Цвет - ${CatColor}`}
-              <br />
-              {`Стоймость часа - ${price} рублей`}
-            </Typography>
+            <Container>
+              <Typography paragraph>Описание:</Typography>
+              <Typography
+                paragraph
+                className={`${style.inform}`}
+              >{`${info}`}</Typography>
+            </Container>
           </CardContent>
-          <CardActions disableSpacing>
-            <Button variant="text" onClick={handleClickBooked(SlideTransition)}>
-              {checked ? <p>Снять бронь!</p> : <p>Забронировать котика!</p>}
-            </Button>
-            <Checkbox
-              id="checkbox1"
-              icon={<BookmarkBorderIcon />}
-              checkedIcon={<BookmarkIcon />}
-              checked={checked}
-            />
-            <ExpandMore
-              expand={expanded}
-              onClick={handleExpandClick}
-              aria-expanded={expanded}
-              aria-label="show more"
-            >
-              <ExpandMoreIcon />
-            </ExpandMore>
-          </CardActions>
-
-          <Collapse in={expanded} timeout="auto" unmountOnExit>
-            <CardContent>
-              <Container>
-                <Typography paragraph>Описание:</Typography>
-                <Typography
-                  paragraph
-                  className="inform"
-                >{`${info}`}</Typography>
-              </Container>
-            </CardContent>
-          </Collapse>
-        </Card>
-      </Grid>
+        </Collapse>
+      </Card>
       <div>
         <Snackbar
           open={state.open}

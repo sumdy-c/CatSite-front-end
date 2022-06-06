@@ -1,4 +1,4 @@
-import "./App.css";
+import style from "./App.module.css";
 import * as React from "react";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
@@ -119,7 +119,7 @@ const App = () => {
       CatPriceInHour: price,
       CatPhoto: avatar
         ? GETNewImg
-        : `http://127.0.0.1:8887/images/1654158490947-defaultImg.png`,
+        : `http://127.0.0.1:8887/images/defaultImgCat.png`,
       InfoCat: info,
       CatColor: color,
       Breed: breed,
@@ -215,35 +215,38 @@ const App = () => {
         setAvatar={setAvatar}
         img={img}
       />
-      <Container className="contain">
-        <Grid container spacing={4}>
+
+      <Container className={`${style.contain}`}>
+        <Grid container spacing={2}>
           {visibleCard.map((elem) => (
-            <CatForm
-              name={elem.NameCat}
-              price={elem.CatPriceInHour}
-              photo={elem.CatPhoto}
-              info={elem.InfoCat}
-              Booked={elem.Booked}
-              age={elem.AgeCat}
-              CatColor={elem.CatColor}
-              breed={elem.Breed}
-              key={elem.id}
-              setTrackerEditID={() => {
-                setTrackerEditID(elem.id);
-              }}
-              deleteCatConfirm={() => deleteCatConfirm(elem.id)}
-              toggleBooked={() => toggleBooked(elem.id)}
-              setOpens={setOpen}
-            />
+            <Grid item xs={12} sm={6} md={4} key={elem.id} zeroMinWidth>
+              <CatForm
+                key={elem.id}
+                name={elem.NameCat}
+                price={elem.CatPriceInHour}
+                photo={elem.CatPhoto}
+                info={elem.InfoCat}
+                Booked={elem.Booked}
+                age={elem.AgeCat}
+                CatColor={elem.CatColor}
+                breed={elem.Breed}
+                setTrackerEditID={() => {
+                  setTrackerEditID(elem.id);
+                }}
+                deleteCatConfirm={() => deleteCatConfirm(elem.id)}
+                toggleBooked={() => toggleBooked(elem.id)}
+                setOpens={setOpen}
+              />
+            </Grid>
           ))}
         </Grid>
       </Container>
-      <Container className="pagginationStyle">
+      <Container className={`${style.pagginationWrapper}`}>
         <Stack spacing={8}>
           <Pagination
             count={Count}
             onChange={getPageCount}
-            className="paggination"
+            className={`${style.paggination}`}
             variant="outlined"
             color="primary"
             size="large"
