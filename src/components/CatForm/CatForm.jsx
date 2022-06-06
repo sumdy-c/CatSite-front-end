@@ -58,7 +58,6 @@ export default function CatForm({
   toggleBooked,
   setTrackerEditID,
   setOpens,
-  loader,
 }) {
   const [expanded, setExpanded] = React.useState(false);
   const handleExpandClick = () => {
@@ -80,6 +79,7 @@ export default function CatForm({
     }
     setOpen(false);
   };
+  const [isLoading, setLoading] = React.useState(false);
 
   function handleListKeyDown(event) {
     if (event.key === "Tab") {
@@ -132,6 +132,10 @@ export default function CatForm({
     setOpens(2);
     handleClose(e);
     setTrackerEditID();
+  };
+
+  const preloader = (e) => {
+    setLoading(true);
   };
 
   return (
@@ -202,10 +206,11 @@ export default function CatForm({
           subheader={`${age} год`}
         />
         <CardMedia
+          onLoad={preloader}
           className={`${style.imgstyle}`}
           component="img"
           height="194"
-          image={photo}
+          image={isLoading ? photo : require("./preload.png")}
           alt="Нет фото("
         />
         <CardContent>
