@@ -2,7 +2,6 @@ import * as React from "react";
 import { styled } from "@mui/material/styles";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
-import style from "./UploadPhoto.module.css";
 import DoneOutlineIcon from "@mui/icons-material/DoneOutline";
 
 const Input = styled("input")({
@@ -12,14 +11,14 @@ const Input = styled("input")({
 const UploadPhoto = ({ setImg, sendfile, img }) => {
   const [doneUpload, setDoneUpload] = React.useState(false);
 
-  const AccessUpload = () => {
+  const accessUpload = () => {
     sendfile();
     setDoneUpload(true);
   };
 
   return (
     <Stack
-      className={`${style.btn}`}
+      style={{ justifyContent: "center", paddingTop: 25 }}
       direction="row"
       alignItems="center"
       spacing={2}
@@ -39,7 +38,7 @@ const UploadPhoto = ({ setImg, sendfile, img }) => {
       <Button
         variant="contained"
         component="span"
-        onClick={AccessUpload}
+        onClick={accessUpload}
         disabled={!Boolean(img)}
         color="success"
       >

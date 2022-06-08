@@ -1,5 +1,4 @@
 import * as React from "react";
-import style from "./CatForm.module.css";
 import { styled } from "@mui/material/styles";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
@@ -49,25 +48,39 @@ export default function CatForm({
   price,
   photo,
   info,
-  Booked,
+  booked,
   age,
-  CatColor,
+  catColor,
   breed,
   id,
   deleteCatConfirm,
-  toggleBooked,
+  togglebooked,
   setTrackerEditID,
   setOpens,
 }) {
   const [expanded, setExpanded] = React.useState(false);
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
-  const [checked, setChecked] = React.useState(Booked);
-
+  const [checked, setChecked] = React.useState(booked);
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef(null);
   const [isModalOpen, setIsModalOpen] = React.useState(false);
+  const [isLoading, setLoading] = React.useState(false);
+  const [state, setState] = React.useState({
+    open: false,
+    Transition: Fade,
+  });
+
+  const prevOpen = React.useRef(open);
+
+  React.useEffect(() => {
+    if (prevOpen.current === true && open === false) {
+      anchorRef.current.focus();
+    }
+    prevOpen.current = open;
+  }, [open]);
+
+  const handleExpandClick = () => {
+    setExpanded(!expanded);
+  };
 
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
@@ -79,7 +92,6 @@ export default function CatForm({
     }
     setOpen(false);
   };
-  const [isLoading, setLoading] = React.useState(false);
 
   function handleListKeyDown(event) {
     if (event.key === "Tab") {
@@ -90,34 +102,21 @@ export default function CatForm({
     }
   }
 
-  const [state, setState] = React.useState({
-    open: false,
-    Transition: Fade,
-  });
-
-  const handleClickBooked = (Transition) => () => {
-    toggleBooked();
+  const handleClickbooked = (Transition) => () => {
+    togglebooked();
     ToggleCheckBox();
     setState({
       open: true,
       Transition,
     });
   };
+
   const handleCloseMes = () => {
     setState({
       ...state,
       open: false,
     });
   };
-
-  const prevOpen = React.useRef(open);
-  React.useEffect(() => {
-    if (prevOpen.current === true && open === false) {
-      anchorRef.current.focus();
-    }
-
-    prevOpen.current = open;
-  }, [open]);
 
   const ToggleCheckBox = () => {
     setChecked(!checked);
@@ -128,13 +127,13 @@ export default function CatForm({
     setIsModalOpen(true);
   };
 
-  const FormCreateOpen = (e) => {
-    setOpens(2);
+  const formCreateOpen = (e) => {
+    setOpens("editCat");
     handleClose(e);
     setTrackerEditID();
   };
 
-  const preloader = (e) => {
+  const preloader = () => {
     setLoading(true);
   };
 
@@ -187,7 +186,7 @@ export default function CatForm({
                             aria-labelledby="composition-button"
                             onKeyDown={handleListKeyDown}
                           >
-                            <MenuItem onClick={FormCreateOpen}>
+                            <MenuItem onClick={formCreateOpen}>
                               Редактировать котика
                             </MenuItem>
                             <MenuItem onClick={handleDeleteCat}>
@@ -207,7 +206,10 @@ export default function CatForm({
         />
         <CardMedia
           onLoad={preloader}
-          className={`${style.imgstyle}`}
+          sx={{
+            height: 305,
+            width: 346,
+          }}
           component="img"
           height="194"
           image={isLoading ? photo : require("./preload.png")}
@@ -217,13 +219,13 @@ export default function CatForm({
           <Typography variant="body2" color="text.secondary">
             {`Порода - ${breed}`}
             <br />
-            {`Цвет - ${CatColor}`}
+            {`Цвет - ${catColor}`}
             <br />
             {`Стоймость часа - ${price} рублей`}
           </Typography>
         </CardContent>
         <CardActions disableSpacing>
-          <Button variant="text" onClick={handleClickBooked(SlideTransition)}>
+          <Button variant="text" onClick={handleClickbooked(SlideTransition)}>
             {checked ? <p>Снять бронь!</p> : <p>Забронировать котика!</p>}
           </Button>
           <Checkbox
@@ -248,7 +250,9 @@ export default function CatForm({
               <Typography paragraph>Описание:</Typography>
               <Typography
                 paragraph
-                className={`${style.inform}`}
+                sx={{
+                  wordBreak: "break-all",
+                }}
               >{`${info}`}</Typography>
             </Container>
           </CardContent>
@@ -260,7 +264,7 @@ export default function CatForm({
           onClose={handleCloseMes}
           TransitionComponent={state.Transition}
           message={
-            Booked ? "Вы успешно забронировали кота!" : "Бронь с котика снята"
+            booked ? "Вы успешно забронировали кота!" : "Бронь с котика снята"
           }
           key={state.Transition.name}
         />

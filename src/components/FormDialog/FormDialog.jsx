@@ -1,5 +1,4 @@
 import * as React from "react";
-import style from "./FormDialog.module.css";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
@@ -21,7 +20,7 @@ export default function FormDialog({
   newCat,
   open,
   setOpen,
-  FuncEditCard,
+  funcEditCard,
   setTrackerEditID,
   trackerEditID,
   setImg,
@@ -29,144 +28,127 @@ export default function FormDialog({
   img,
   setAvatar,
 }) {
+  //Стейты читающие форму
+  const [name, setName] = React.useState("");
+  const [breed, setbreed] = React.useState("");
+  const [color, setColor] = React.useState("");
+  const [price, setPrice] = React.useState("");
+  const [info, setinfo] = React.useState("");
+  const [age, setAge] = React.useState("");
+
+  // Обработчики отправки формы и функция собирающая массив данных
   const handleClose = () => {
     setTrackerEditID(1);
-    setOpen(-0);
+    setOpen("");
     setAvatar(null);
   };
-
   const handleConfirm = () => {
-    if (open === 1) {
-      if (ValidExamination()) {
-        setOpen(-0);
-        newCat(AccsessForm());
+    if (open === "addCat") {
+      if (validExamination()) {
+        setOpen("");
+        newCat(accessForm());
         setAvatar(null);
       }
     }
-    if (open === 2) {
-      if (ValidExamination()) {
-        setOpen(-0);
-        FuncEditCard(trackerEditID, AccsessEditForm());
+    if (open === "editCat") {
+      if (validExamination()) {
+        setOpen("");
+        funcEditCard(trackerEditID, accessForm());
         setTrackerEditID(1);
         setAvatar(null);
       }
     }
   };
 
-  const [name, setName] = React.useState("");
-  const [breed, setBreed] = React.useState("");
-  const [color, setColor] = React.useState("");
-  const [price, setPrice] = React.useState("");
-  const [info, setinfo] = React.useState("");
-  const [age, setAge] = React.useState("");
-
-  const ValidExamination = () => {
-    const state =
-      ValidSetting.Name === false &&
-      ValidSetting.Breed === false &&
-      ValidSetting.Color === false &&
-      ValidSetting.Price === false &&
-      ValidSetting.Age === false;
-    return state;
+  const accessForm = () => {
+    let data = {
+      name: name,
+      breed: breed,
+      age: age,
+      color: color,
+      price: price,
+      info: info,
+    };
+    setAge("");
+    setName("");
+    setPrice("");
+    setinfo("");
+    setbreed("");
+    setColor("");
+    return data;
   };
 
+  // Обработчики чтения формы
   const handlerChangeAge = (event) => {
     setAge(event.target.value.replace(/\b0+/g, ""));
-    ValidExamination();
+    validExamination();
   };
-
   const handlerCatName = (event) => {
     setName(event.target.value);
-    ValidExamination();
+    validExamination();
   };
   const handleChangePrice = (event) => {
     setPrice(event.target.value.replace(/\b0+/g, ""));
-    ValidExamination();
+    validExamination();
   };
   const handleChangeInfo = (event) => {
     setinfo(event.target.value);
-    ValidExamination();
+    validExamination();
   };
-
-  const handleChangeBreed = (event) => {
-    setBreed(event.target.value);
-    ValidExamination();
+  const handleChangebreed = (event) => {
+    setbreed(event.target.value);
+    validExamination();
   };
-
   const handleChangeColor = (event) => {
     setColor(event.target.value);
-    ValidExamination();
+    validExamination();
+  };
+  //правила валидации
+  const validExamination = () => {
+    const state =
+      validSetting.name === false &&
+      validSetting.breed === false &&
+      validSetting.color === false &&
+      validSetting.price === false &&
+      validSetting.age === false;
+    return state;
   };
 
-  const ValidSetting = {
-    Name: name.length >= 20 || name === "",
-    Price:
+  const validSetting = {
+    name: name.length >= 20 || name === "",
+    price:
       isNaN(price) ||
       price <= 100 ||
       price >= 2001 ||
       price === RegExp(/^0+/, ""),
-    Color: color === "",
-    Breed: breed === "",
-    Age: isNaN(age) || age > 26 || age <= 0 || age === RegExp(/^0+/, ""),
+    color: color === "",
+    breed: breed === "",
+    age: isNaN(age) || age > 26 || age <= 0 || age === RegExp(/^0+/, ""),
   };
 
-  const AccsessEditForm = () => {
-    let data = {
-      name: name,
-      breed: breed,
-      age: age,
-      color: color,
-      price: price,
-      info: info,
-    };
-    setAge("");
-    setName("");
-    setPrice("");
-    setinfo("");
-    setBreed("");
-    setColor("");
-    return data;
-  };
-
-  const AccsessForm = () => {
-    let data = {
-      name: name,
-      breed: breed,
-      age: age,
-      color: color,
-      price: price,
-      info: info,
-    };
-    setAge("");
-    setName("");
-    setPrice("");
-    setinfo("");
-    setBreed("");
-    setColor("");
-    return data;
-  };
-
+  // выбор титульника
   let title =
-    open === 1 ? "Добавление котика" : "Изменение информации о котике";
+    open === "addCat" ? "Добавление котика" : "Изменение информации о котике";
   let dialogContent =
-    open === 1
+    open === "editCat"
       ? "Пожалуйста укажите всю информацию о вашем питомце"
       : "Обращаем ваше внимание, изменения в карточке котика отменить нельзя!";
+  const isDialogOpen = open === "addCat" || open === "editCat";
 
   return (
     <>
-      <Dialog open={Boolean(open)} onClose={handleClose}>
+      <Dialog open={isDialogOpen} onClose={handleClose}>
         <DialogTitle>{`${title}`}</DialogTitle>
         <DialogContent>
           <DialogContentText>{`${dialogContent}`}</DialogContentText>
 
           <TextField
-            error={ValidSetting.Name}
+            error={validSetting.name}
             id="NameAddExamination"
-            className={`${style.modalStyle}`}
+            style={{ paddingTop: 10, paddingBottom: 10 }}
             autoFocus
             helperText={
-              ValidSetting.Name
+              validSetting.name
                 ? "Не более 20 символов! Обязательно для заполнения!"
                 : ""
             }
@@ -179,17 +161,25 @@ export default function FormDialog({
             aria-describedby="component-error-text"
           />
 
-          <Box sx={{ minWidth: 90 }} className={`${style.modalStyle}`}>
-            <FormControl variant="standard" className={`${style.fieldWidth}`}>
+          <Box
+            sx={{ minWidth: 90 }}
+            style={{ paddingTop: 10, paddingBottom: 10 }}
+          >
+            <FormControl
+              variant="standard"
+              sx={{
+                width: "-webkit-fill-available",
+              }}
+            >
               <InputLabel id="demo-simple-select-label">
                 Укажите породу котика!
               </InputLabel>
               <Select
-                error={ValidSetting.Breed}
+                error={validSetting.breed}
                 value={breed}
-                label="Breed"
-                onChange={handleChangeBreed}
-                id="BreedAddExamination"
+                label="breed"
+                onChange={handleChangebreed}
+                id="breedAddExamination"
               >
                 <MenuItem id="default" disabled value={""} autoFocus>
                   Укажите породу котика!
@@ -203,13 +193,13 @@ export default function FormDialog({
             </FormControl>
           </Box>
           <TextField
-            error={ValidSetting.Age}
+            error={validSetting.age}
             helperText={
-              ValidSetting.Age
+              validSetting.age
                 ? "Только числа! Не более 25 лет!!! Обязательно для заполнения!"
                 : ""
             }
-            className={`${style.modalStyle}`}
+            style={{ paddingTop: 10, paddingBottom: 10 }}
             autoFocus
             margin="dense"
             label="Возраст котика"
@@ -220,12 +210,17 @@ export default function FormDialog({
             id="AgeAddExamination"
           />
           <Box sx={{ minWidth: 120 }}>
-            <FormControl variant="standard" className={`${style.fieldWidth}`}>
+            <FormControl
+              variant="standard"
+              sx={{
+                width: "-webkit-fill-available",
+              }}
+            >
               <InputLabel id="demo-simple-select-label">
                 Укажите цвет котика
               </InputLabel>
               <Select
-                error={ValidSetting.Color}
+                error={validSetting.color}
                 value={color}
                 autoComplete="color1"
                 label="dsf"
@@ -244,14 +239,14 @@ export default function FormDialog({
             </FormControl>
           </Box>
           <TextField
-            error={ValidSetting.Price}
+            error={validSetting.price}
             helperText={
-              ValidSetting.Price
+              validSetting.price
                 ? "Не менее 100 и не более 2000 рублей! Обязательно для заполнения!!"
                 : ""
             }
             id="PriceAddExamination"
-            className={`${style.modalStyle}`}
+            style={{ paddingTop: 10, paddingBottom: 10 }}
             autoFocus
             margin="dense"
             label="Стоймость аренды котика"
@@ -262,12 +257,11 @@ export default function FormDialog({
           />
           <UploadPhoto setImg={setImg} sendfile={sendfile} img={img} />
           <TextareaAutosize
-            className={`${style.textarea}`}
             id="TextAddExamination"
             aria-label="ДопИнфКот"
             onChange={handleChangeInfo}
             placeholder="Дополнительная информация о котике (Это поле не обязательно для заполнения)"
-            style={{ width: 550, height: 109 }}
+            style={{ width: 550, height: 109, marginTop: 30 }}
           />
         </DialogContent>
         <DialogActions>
