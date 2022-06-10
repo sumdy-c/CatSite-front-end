@@ -1,6 +1,7 @@
 import { Paper } from "@mui/material";
 import { Typography } from "@mui/material";
 import ScrollDialog from "./FooterInform.jsx";
+import ContactInfoDialog from "../ContactInform/ContactInfo.jsx";
 
 const Footer = () => {
   return (
@@ -52,9 +53,11 @@ const Footer = () => {
         <br />
         <Typography variant="h5">Телефон для связи: +79674356789</Typography>
         <br />
-        <Typography variant="h5">
+        <Typography variant="h5" style={{ marginBottom: 15 }}>
           Телефон для связи с юристом: +79876543223
         </Typography>
+        <ContactInfoDialog />
+        <br />
         <ScrollDialog />
       </Paper>
     </Paper>
