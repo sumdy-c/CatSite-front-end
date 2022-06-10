@@ -46,9 +46,10 @@ const App = () => {
         return { ...state };
     }
   }
-  const deleteCatConfirm = (key) => {
-    dispatch({ type: "delete", key: key });
-  };
+  // const deleteCatConfirm = (key) => {
+  //   dispatch({ type: "delete", key: key });
+  // };
+
   const sendfile = React.useCallback(async () => {
     try {
       const data = new FormData();
@@ -116,7 +117,9 @@ const App = () => {
                 setTrackerEditID={() => {
                   setTrackerEditID(elem.id);
                 }}
-                deleteCatConfirm={() => deleteCatConfirm(elem.id)}
+                deleteCatConfirm={() =>
+                  dispatch({ type: "delete", key: elem.id })
+                }
                 togglebooked={() =>
                   dispatch({ type: "togglebooked", key: elem.id })
                 }
