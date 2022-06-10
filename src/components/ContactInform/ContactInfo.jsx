@@ -1,5 +1,4 @@
 import * as React from "react";
-import "./Background.css";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import InputLabel from "@mui/material/InputLabel";
@@ -130,10 +129,13 @@ export default function ContactInfoDialog() {
         </AppBar>
 
         <Box
-          className="wrap"
+          // className="wrap"
+
           sx={{
             display: "flex",
             justifyContent: "space-around",
+            backgroundImage:
+              "url(http://127.0.0.1:8887/imgPersonal/backgroundQwstion.jpg)",
           }}
         >
           <form
@@ -168,35 +170,11 @@ export default function ContactInfoDialog() {
                           }}
                           error={valid}
                         >
-                          <MenuItem value="Сергеева М.А.">
-                            Сергеева Милана Александровна (Генеральный директор)
-                          </MenuItem>
-                          <MenuItem value="Зыков С.А.">
-                            Зыков Семён Артёмович (Логист)
-                          </MenuItem>
-                          <MenuItem value="Белкин И.М.">
-                            Белкин Игорь Максимович (Автомеханик)
-                          </MenuItem>
-                          <MenuItem value="Ильина С.О.">
-                            Ильина София Олеговна (Инфекционист)
-                          </MenuItem>
-                          <MenuItem value="Третьяков В.А.">
-                            Третьяков Владимир Александрович (Менеджер по
-                            продажам)
-                          </MenuItem>
-                          <MenuItem value="Денисова С.М.">
-                            Денисова София Максимовна (Менеджер по продажам)
-                          </MenuItem>
-                          <MenuItem value="Алексеев А.Д.">
-                            Алексеев Александр Демьянович (Системный
-                            администратор)
-                          </MenuItem>
-                          <MenuItem value="Наумов Е.Б.">
-                            Наумов Егор Борисович (Снабженец)
-                          </MenuItem>
-                          <MenuItem value="Беляева С.К.">
-                            Беляева София Константиновна (Бизнес-аналитик)
-                          </MenuItem>
+                          {Personal.map((el) => (
+                            <MenuItem key={el.key} value={el.value}>
+                              {el.name} ({el.employee})
+                            </MenuItem>
+                          ))}
                         </Select>
                       </FormControl>
                     )}
