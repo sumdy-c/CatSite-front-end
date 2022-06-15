@@ -1,6 +1,4 @@
 const ToggleBooked = (state, key) => {
-  console.log(state);
-  console.log(key);
   const indexToggle = state.findIndex((el) => el.id === key);
   const oldEl = state[indexToggle];
   const newItem = { ...oldEl, booked: !oldEl.booked };

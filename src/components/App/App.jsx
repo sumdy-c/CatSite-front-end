@@ -13,6 +13,7 @@ import axios from "axios";
 import dataCat from "./DataCat.js";
 import Services from "../../service/Service";
 import filterCat from "../FilterCat/FilterCat";
+import PrivateOffice from "../PrivateOffice/PrivateOffice";
 
 // Запуск серверной части с помощью Web Server For Chrome.
 
@@ -25,7 +26,7 @@ const App = () => {
   const [open, setOpen] = useState("closeModal");
   const [trackerEditID, setTrackerEditID] = useState(1);
   const [page, setPage] = useState(1);
-  const [booked, setbooked] = useState("all");
+  const [booked, setBooked] = useState("all");
 
   function reducer(state, action) {
     switch (action.type) {
@@ -46,9 +47,6 @@ const App = () => {
         return { ...state };
     }
   }
-  // const deleteCatConfirm = (key) => {
-  //   dispatch({ type: "delete", key: key });
-  // };
 
   const sendfile = React.useCallback(async () => {
     try {
@@ -68,6 +66,7 @@ const App = () => {
       console.log(`Ошибка сервера : ${er}`);
     }
   }, [img]);
+
   let visibleCard = filterCat(state, booked);
   const Count = Math.ceil(state.length / 6);
   const getPageCount = (e, page) => {
@@ -75,10 +74,10 @@ const App = () => {
   };
 
   visibleCard = Paggination(visibleCard, page);
-
   return (
     <>
-      <Header isOpen={setOpen} setbooked={setbooked} />
+      <Header isOpen={setOpen} setBooked={setBooked} />
+      <PrivateOffice></PrivateOffice>
       <FormDialog
         newCat={(data) => dispatch({ type: "add", data, avatar: avatar })}
         open={open}

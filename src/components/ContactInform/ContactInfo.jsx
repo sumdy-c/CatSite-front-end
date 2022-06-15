@@ -30,6 +30,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 export default function ContactInfoDialog() {
   const [open, setOpen] = React.useState(false);
   const [valid, setValid] = React.useState(false);
+
   const [viewMes, setViewMes] = React.useState(false);
   const { control, reset, handleSubmit } = useForm({
     defaultValues: {
@@ -42,7 +43,6 @@ export default function ContactInfoDialog() {
 
   const onSubmit = (data) => {
     console.log(validateEmail(data.contactInfo));
-
     if (
       validateEmail(data.contactInfo) &&
       validateName(data.firstName) &&
@@ -129,8 +129,6 @@ export default function ContactInfoDialog() {
         </AppBar>
 
         <Box
-          // className="wrap"
-
           sx={{
             display: "flex",
             justifyContent: "space-around",

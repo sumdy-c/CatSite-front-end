@@ -3,7 +3,7 @@ import Button from "@mui/material/Button";
 import * as React from "react";
 import { ButtonGroup } from "@mui/material";
 
-export default function Header({ isOpen, setbooked }) {
+export default function Header({ isOpen, setBooked }) {
   const [variantAll, setVariantAll] = React.useState("contained");
   const [variantbooked, setVariantbooked] = React.useState("text");
   const [variantFree, setVariantFree] = React.useState("text");
@@ -12,19 +12,19 @@ export default function Header({ isOpen, setbooked }) {
     isOpen("addCat");
   };
   const VisiblebookedCat = () => {
-    setbooked("booked");
+    setBooked("booked");
     setVariantAll("text");
     setVariantbooked("contained");
     setVariantFree("text");
   };
   const VisibleAllCat = () => {
-    setbooked("all");
+    setBooked("all");
     setVariantAll("contained");
     setVariantbooked("text");
     setVariantFree("text");
   };
   const VisibleFreebookedCat = () => {
-    setbooked("free");
+    setBooked("free");
     setVariantAll("text");
     setVariantbooked("text");
     setVariantFree("contained");
