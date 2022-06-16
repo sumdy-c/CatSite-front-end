@@ -1,5 +1,5 @@
 import axios from "axios";
-import PassKeyGen from "./PassKeyGen";
+import PassKeyGen from "../Cryptografy/PassKeyGen";
 
 const getDataJsonUser = (obj) => {
   console.log(obj);

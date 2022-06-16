@@ -1,10 +1,10 @@
 import * as React from "react";
 import Paper from "@mui/material/Paper";
-import LoginForm from "./LoginForm.jsx";
-import RegisterForm from "./RegisterForm.jsx";
-import UserCard from "./Office.js";
+import LoginForm from "../InitializationForm/LoginForm.jsx";
+import RegisterForm from "../InitializationForm/RegisterForm.jsx";
+import UserCard from "./UserCard.jsx";
 import axios from "axios";
-import Decryption from "./Decryption.js";
+import Decryption from "../Cryptografy/Decryption.js";
 
 export default function PrivateOffice() {
   const [autorization, setAutorization] = React.useState(false);

@@ -7,14 +7,29 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { useForm, Controller } from "react-hook-form";
-import getInfoUser from "./GetDataAccount.js";
+import getInfoUser from "../GettingData/GetDataAccount.js";
+import Alert from "@mui/material/Alert";
+import Stack from "@mui/material/Stack";
 import axios from "axios";
 
 export default function RegisterForm() {
   const [openReg, setOpenReg] = React.useState(false);
   const [valid, setValid] = React.useState(false);
+  const [alertReg, setAlertReg] = React.useState(false);
+  let namesValid = [];
+  axios
+    .get("http://localhost:3001/users")
+    .then((res) => {
+      res.data.forEach((item) => {
+        namesValid.push(item.name);
+      });
+    })
+    .catch((error) => {
+      console.log(error);
+      return null;
+    });
 
-  const { control, reset, handleSubmit } = useForm({
+  const { control, reset, handleSubmit, register } = useForm({
     defaultValues: {
       firstName: "",
       password: "",
@@ -24,29 +39,18 @@ export default function RegisterForm() {
   });
 
   const validNewName = (name) => {
-    debugger;
-    let data;
-    let val = false;
-    axios
-      .get("http://localhost:3001/users")
-      .then((res) => {
-        data = res.data;
-        data.forEach((item) => {
-          console.log(name);
-          if (name === item.name) {
-            val = false;
-          } else {
-            val = true;
-          }
-        });
-        return val;
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    let validname = namesValid.findIndex((item) => item === name);
+    if (validname === -1) {
+      return true;
+    } else {
+      return false;
+    }
   };
 
   const handleClickOpen = () => {
+    console.log("Отправка формы");
+    console.log(namesValid);
+    console.log("Отправка формы");
     setOpenReg(true);
     reset();
   };
@@ -59,13 +63,17 @@ export default function RegisterForm() {
   const onSubmit = async (data) => {
     if (
       validateEmail(data.email) &&
-      validatePass(data.password, data.confirmPass)
-      // validNewName(data.firstName)
+      validatePass(data.password, data.confirmPass) &&
+      validNewName(data.firstName)
     ) {
       handleClose();
       setValid(false);
       getInfoUser(data.firstName, data.password, data.email);
       reset();
+      setAlertReg(true);
+      setTimeout(() => {
+        setAlertReg(false);
+      }, 2000);
     } else {
       setValid(true);
       console.log("Тут ошибка!");
@@ -90,13 +98,19 @@ export default function RegisterForm() {
 
   return (
     <div>
-      <Button
-        variant="contained"
-        onClick={handleClickOpen}
-        style={{ margin: 5 }}
-      >
-        Зарегистрироваться
-      </Button>
+      {alertReg ? (
+        <Stack sx={{ width: "100%" }} spacing={2}>
+          <Alert severity="success">Аккаунт был добавлен в систему!</Alert>
+        </Stack>
+      ) : (
+        <Button
+          variant="contained"
+          onClick={handleClickOpen}
+          style={{ width: "-webkit-fill-available", margin: 10 }}
+        >
+          Зарегистрироваться
+        </Button>
+      )}
       <Dialog open={openReg} onClose={handleClose}>
         <DialogTitle>Регистрация</DialogTitle>
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -110,19 +124,24 @@ export default function RegisterForm() {
               control={control}
               render={({ field: { onChange, value } }) => (
                 <TextField
+                  {...register("firstName", { required: true, minLength: 4 })}
                   label="Имя пользователя (можно псевдоним)"
                   variant="filled"
                   onChange={onChange}
                   value={value}
                   style={{ width: 550 }}
+                  error={value.length < 4}
+                  helperText={"Минимум 4 символа"}
                 />
               )}
             />
+
             <Controller
               name="password"
               control={control}
               render={({ field: { onChange, value } }) => (
                 <TextField
+                  {...register("password", { required: true, minLength: 6 })}
                   label="Пароль для входа в аккаунт"
                   type={"password"}
                   error={valid}
@@ -130,6 +149,7 @@ export default function RegisterForm() {
                   onChange={onChange}
                   value={value}
                   style={{ width: 550 }}
+                  helperText={"Минимум 6 символов"}
                 />
               )}
             />
@@ -139,6 +159,10 @@ export default function RegisterForm() {
                 control={control}
                 render={({ field: { onChange, value } }) => (
                   <TextField
+                    {...register("confirmPass", {
+                      required: true,
+                      minLength: 6,
+                    })}
                     error={valid}
                     label="Повторите пароль"
                     variant="filled"
@@ -146,6 +170,7 @@ export default function RegisterForm() {
                     onChange={onChange}
                     value={value}
                     style={{ width: 550 }}
+                    helperText={"Пароли должны совпадать"}
                   />
                 )}
               />
@@ -170,6 +195,7 @@ export default function RegisterForm() {
                     onChange={onChange}
                     value={value}
                     style={{ width: 550 }}
+                    helperText={"Электронная почта в валидном формате"}
                   />
                 )}
               />

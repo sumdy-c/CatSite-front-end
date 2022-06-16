@@ -21,7 +21,7 @@ import { useForm, Controller } from "react-hook-form";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
-import getData from "./GetData";
+import getData from "../GettingData/GetDataContact";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
