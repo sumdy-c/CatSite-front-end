@@ -5,7 +5,6 @@ const Decryption = (keygen) => {
   let decyptPass = "";
 
   const passLog = keygen.split(keyDivider);
-  console.log(passLog);
 
   passLog.forEach((elem) => {
     saltw.forEach((item) => {

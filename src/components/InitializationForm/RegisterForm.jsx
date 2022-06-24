@@ -48,9 +48,6 @@ export default function RegisterForm() {
   };
 
   const handleClickOpen = () => {
-    console.log("Отправка формы");
-    console.log(namesValid);
-    console.log("Отправка формы");
     setOpenReg(true);
     reset();
   };

@@ -43,7 +43,7 @@ const dataCat = [
     catPhoto: "http://127.0.0.1:8887/images/1654170092972-kotes285erz.jpg",
     infoCat:
       "Кот который быстро бегает и высоко прыгает lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem ",
-    catColor: "Черный",
+    catColor: "Блю-пойнт",
     breed: "Аравийский мяу",
     booked: false,
     ageCat: 1,

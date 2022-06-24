@@ -2,7 +2,6 @@ import axios from "axios";
 import PassKeyGen from "../Cryptografy/PassKeyGen";
 
 const getDataJsonUser = (obj) => {
-  console.log(obj);
   axios
     .post("http://localhost:3001/users", {
       name: obj.name,
@@ -10,12 +9,8 @@ const getDataJsonUser = (obj) => {
       email: obj.email,
       id: Date.now(),
     })
-    .then((res) => {
-      console.log(res.data);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+    .then((res) => {})
+    .catch((error) => {});
 };
 
 const getInfoUser = async (name, pass, email) => {

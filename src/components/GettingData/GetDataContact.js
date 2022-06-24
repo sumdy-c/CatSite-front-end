@@ -1,6 +1,6 @@
 const getDataJsonUser = (obj) => {
   const json = JSON.stringify(obj);
-  console.log("json func");
+  console.log("Сообщение персоналу send");
   console.log(json);
 };
 

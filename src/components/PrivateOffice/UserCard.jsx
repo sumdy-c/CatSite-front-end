@@ -35,7 +35,7 @@ export default function UserCard({ userNameCard, setAutorization }) {
           <Typography sx={{ mb: 1.5 }} color="green">
             online
           </Typography>
-          <Typography variant="body2">Список котов</Typography>
+          <Typography variant="h6"> </Typography>
         </CardContent>
         <CardActions>
           <Button color="error" size="small" onClick={handleExitAccount}>

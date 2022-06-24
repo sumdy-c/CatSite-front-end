@@ -36,7 +36,7 @@ export default function LoginForm({ LoginUser, correctData, setCorrectData }) {
       reset();
       setTimeout(() => {
         setCorrectData(null);
-      }, 2000);
+      }, 4000);
     }
   };
 

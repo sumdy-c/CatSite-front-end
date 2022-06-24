@@ -42,7 +42,6 @@ export default function ContactInfoDialog() {
   });
 
   const onSubmit = (data) => {
-    console.log(validateEmail(data.contactInfo));
     if (
       validateEmail(data.contactInfo) &&
       validateName(data.firstName) &&
@@ -50,7 +49,6 @@ export default function ContactInfoDialog() {
       validatePerson(data.Person)
     ) {
       setValid(false);
-      console.log(data);
       getData(data);
       reset();
       setViewMes(true);
@@ -60,7 +58,6 @@ export default function ContactInfoDialog() {
     } else {
       setViewMes(false);
       setValid(true);
-      console.log("Тут ошибка!");
     }
   };
 

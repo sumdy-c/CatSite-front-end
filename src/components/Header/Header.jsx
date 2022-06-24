@@ -1,68 +1,37 @@
-import Paper from "@mui/material/Paper";
-import Button from "@mui/material/Button";
 import * as React from "react";
-import { ButtonGroup } from "@mui/material";
+import { Paper } from "@mui/material";
+import { Outlet } from "react-router";
+import Footer from "../Footer/Footer";
 
-export default function Header({ isOpen, setBooked }) {
-  const [variantAll, setVariantAll] = React.useState("contained");
-  const [variantbooked, setVariantbooked] = React.useState("text");
-  const [variantFree, setVariantFree] = React.useState("text");
-
-  const handleClickOpen = () => {
-    isOpen("addCat");
-  };
-  const VisiblebookedCat = () => {
-    setBooked("booked");
-    setVariantAll("text");
-    setVariantbooked("contained");
-    setVariantFree("text");
-  };
-  const VisibleAllCat = () => {
-    setBooked("all");
-    setVariantAll("contained");
-    setVariantbooked("text");
-    setVariantFree("text");
-  };
-  const VisibleFreebookedCat = () => {
-    setBooked("free");
-    setVariantAll("text");
-    setVariantbooked("text");
-    setVariantFree("contained");
-  };
-
+const Header = () => {
   return (
     <>
       <Paper
-        elevation={8}
         style={{
           display: "flex",
-          margin: 15,
-          padding: 2,
           height: "max-content",
           width: "-webkit-fill-available",
-          position: "static",
-          flexWrap: "wrap",
-          marginTop: 0,
-          alignContent: "space-between",
-          justifyContent: "space-between",
+          marginBottom: 15,
+          justifyContent: "center",
+          alignContent: "center",
         }}
       >
-        <Button size="large" onClick={handleClickOpen}>
-          Добавить своего котика!
-        </Button>
-        <span style={{ marginLeft: 305 }}>🆃🅷🅴 | 🅼🅴🅾🆆 | 🆂🅷🅾🅿</span>
-        <ButtonGroup disableElevation variant={`${variantFree}`}>
-          <Button onClick={VisibleFreebookedCat}>
-            Досупные для бронирования
-          </Button>
-          <Button variant={`${variantAll}`} onClick={VisibleAllCat}>
-            Все котики
-          </Button>
-          <Button variant={`${variantbooked}`} onClick={VisiblebookedCat}>
-            Забронированные котики
-          </Button>
-        </ButtonGroup>
+        <span
+          style={{
+            marginTop: 10,
+            fontSize: "-webkit-xxx-large",
+            fontStyle: "italic",
+            fontFamily: "fantasy",
+            color: "black",
+          }}
+        >
+          THE MEOW SHOP
+        </span>
       </Paper>
+      <Outlet />
+      <Footer />
     </>
   );
-}
+};
+
+export default Header;

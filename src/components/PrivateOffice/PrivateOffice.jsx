@@ -23,10 +23,8 @@ export default function PrivateOffice() {
               setAutorization(true);
               setUserNameCard(item.name);
               setCorrectData("Correct");
-              console.log("АВТОРИЗАЦИЯ ПРОШЛА УСПЕШНО!!!");
             } else {
               setCorrectData("NoCorrect");
-              console.log("Не авторизован!");
             }
           }
         });
