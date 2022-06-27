@@ -17,7 +17,7 @@ export default function AlertDialog({ modalOpen, modal, deleteCatConfirm }) {
   };
 
   return (
-    <div>
+    <>
       <Dialog
         open={modal}
         onClose={handleClose}
@@ -38,6 +38,6 @@ export default function AlertDialog({ modalOpen, modal, deleteCatConfirm }) {
           <Button onClick={handleDelete}>Принять</Button>
         </DialogActions>
       </Dialog>
-    </div>
+    </>
   );
 }

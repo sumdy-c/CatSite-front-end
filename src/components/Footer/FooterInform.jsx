@@ -30,7 +30,7 @@ export default function ScrollDialog() {
   };
 
   return (
-    <div>
+    <>
       <Button onClick={handleClickOpen("paper")}>
         © 2001–2022, ООО "МяуШоп"
       </Button>
@@ -52,6 +52,6 @@ export default function ScrollDialog() {
           <Button onClick={handleClose}>Закрыть окно</Button>
         </DialogActions>
       </Dialog>
-    </div>
+    </>
   );
 }

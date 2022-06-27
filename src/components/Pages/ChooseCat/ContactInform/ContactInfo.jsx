@@ -89,7 +89,7 @@ export default function ContactInfoDialog() {
   };
 
   return (
-    <div>
+    <>
       <Button variant="text" onClick={handleClickOpen} size="large">
         Открыть контактную информацию
       </Button>
@@ -274,6 +274,6 @@ export default function ContactInfoDialog() {
           </Grid>
         </List>
       </Dialog>
-    </div>
+    </>
   );
 }

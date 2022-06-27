@@ -7,15 +7,13 @@ import CatWikiPage from "../Pages/CatWikiPage/CatWikiPage";
 
 const App = () => {
   return (
-    <>
-      <Routes>
-        <Route path="/" element={<Header />}>
-          <Route index element={<MainPageMenu />} />
-          <Route path="/rntcat" element={<ChooseCatPage />} />
-          <Route path="/catwiki" element={<CatWikiPage />} />
-        </Route>
-      </Routes>
-    </>
+    <Routes>
+      <Route path="/" element={<Header />}>
+        <Route index element={<MainPageMenu />} />
+        <Route path="/rntcat" element={<ChooseCatPage />} />
+        <Route path="/catwiki" element={<CatWikiPage />} />
+      </Route>
+    </Routes>
   );
 };
 export default App;

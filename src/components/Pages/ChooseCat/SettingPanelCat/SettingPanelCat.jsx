@@ -32,41 +32,39 @@ export default function SettingPanelCat({ isOpen, setBooked }) {
   };
 
   return (
-    <>
-      <Paper
-        elevation={8}
-        style={{
-          display: "flex",
-          margin: 15,
-          padding: 2,
-          height: "max-content",
-          width: "-webkit-fill-available",
-          position: "static",
-          flexWrap: "wrap",
-          marginTop: 0,
-          alignContent: "space-between",
-          justifyContent: "space-between",
-        }}
-      >
-        <Button variant="contained" size="large" onClick={handleClickOpen}>
-          Добавить своего котика!
+    <Paper
+      elevation={8}
+      style={{
+        display: "flex",
+        margin: 15,
+        padding: 2,
+        height: "max-content",
+        width: "-webkit-fill-available",
+        position: "static",
+        flexWrap: "wrap",
+        marginTop: 0,
+        alignContent: "space-between",
+        justifyContent: "space-between",
+      }}
+    >
+      <Button variant="contained" size="large" onClick={handleClickOpen}>
+        Добавить своего котика!
+      </Button>
+      <Link to="/" style={{ textDecoration: "none" }}>
+        <Button size="large">Вернуться на главную страницу</Button>
+      </Link>
+      <span style={{ marginLeft: 10 }}>🆃🅷🅴 | 🅼🅴🅾🆆 | 🆂🅷🅾🅿</span>
+      <ButtonGroup disableElevation variant={`${variantFree}`}>
+        <Button onClick={VisibleFreebookedCat}>
+          Досупные для бронирования
         </Button>
-        <Link to="/" style={{ textDecoration: "none" }}>
-          <Button size="large">Вернуться на главную страницу</Button>
-        </Link>
-        <span style={{ marginLeft: 10 }}>🆃🅷🅴 | 🅼🅴🅾🆆 | 🆂🅷🅾🅿</span>
-        <ButtonGroup disableElevation variant={`${variantFree}`}>
-          <Button onClick={VisibleFreebookedCat}>
-            Досупные для бронирования
-          </Button>
-          <Button variant={`${variantAll}`} onClick={VisibleAllCat}>
-            Все котики
-          </Button>
-          <Button variant={`${variantbooked}`} onClick={VisiblebookedCat}>
-            Забронированные котики
-          </Button>
-        </ButtonGroup>
-      </Paper>
-    </>
+        <Button variant={`${variantAll}`} onClick={VisibleAllCat}>
+          Все котики
+        </Button>
+        <Button variant={`${variantbooked}`} onClick={VisiblebookedCat}>
+          Забронированные котики
+        </Button>
+      </ButtonGroup>
+    </Paper>
   );
 }

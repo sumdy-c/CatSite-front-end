@@ -94,7 +94,7 @@ export default function RegisterForm() {
   };
 
   return (
-    <div>
+    <>
       {alertReg ? (
         <Stack sx={{ width: "100%" }} spacing={2}>
           <Alert severity="success">Аккаунт был добавлен в систему!</Alert>
@@ -215,6 +215,6 @@ export default function RegisterForm() {
           </DialogActions>
         </form>
       </Dialog>
-    </div>
+    </>
   );
 }

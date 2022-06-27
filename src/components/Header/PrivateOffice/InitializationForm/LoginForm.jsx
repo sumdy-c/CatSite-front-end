@@ -41,7 +41,7 @@ export default function LoginForm({ LoginUser, correctData, setCorrectData }) {
   };
 
   return (
-    <div>
+    <>
       <Button variant="text" onClick={handleClickOpen} style={{ margin: 5 }}>
         Войти в личный кабинет
       </Button>
@@ -91,6 +91,6 @@ export default function LoginForm({ LoginUser, correctData, setCorrectData }) {
           </DialogActions>
         </form>
       </Dialog>
-    </div>
+    </>
   );
 }
