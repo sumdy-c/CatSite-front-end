@@ -5,6 +5,7 @@ import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { Paper } from "@mui/material";
+import Box from "@mui/material/Box";
 
 export default function UserCard({ userNameCard, setAutorization }) {
   const [exit, setExit] = React.useState(false);
@@ -22,7 +23,7 @@ export default function UserCard({ userNameCard, setAutorization }) {
   };
 
   return (
-    <div
+    <Box
       style={{
         display: "flex",
         flexWrap: "wrap",
@@ -68,6 +69,6 @@ export default function UserCard({ userNameCard, setAutorization }) {
           </Button>
         </Paper>
       ) : null}
-    </div>
+    </Box>
   );
 }

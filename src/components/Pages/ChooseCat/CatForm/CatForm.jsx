@@ -29,6 +29,7 @@ import Slide from "@mui/material/Slide";
 import AlertDialog from "./AlertDialog.jsx";
 import MenuIcon from "@mui/icons-material/Menu";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
+import Box from "@mui/material/Box";
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -145,7 +146,7 @@ export default function CatForm({
           avatar={<Avatar sx={{ bgcolor: red[500] }}>Кот</Avatar>}
           action={
             <Stack direction="row" spacing={2}>
-              <div>
+              <Box>
                 <IconButton
                   ref={anchorRef}
                   aria-controls={open ? "composition-menu" : undefined}
@@ -192,7 +193,7 @@ export default function CatForm({
                     </Grow>
                   )}
                 </Popper>
-              </div>
+              </Box>
             </Stack>
           }
           title={`${name}`}
@@ -247,7 +248,7 @@ export default function CatForm({
           </CardContent>
         </Collapse>
       </Card>
-      <div>
+      <Box>
         <Snackbar
           open={state.open}
           onClose={handleCloseMes}
@@ -257,7 +258,7 @@ export default function CatForm({
           }
           key={state.Transition.name}
         />
-      </div>
+      </Box>
       {isModalOpen ? (
         <AlertDialog
           modalOpen={setIsModalOpen}

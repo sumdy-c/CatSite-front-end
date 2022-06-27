@@ -2,6 +2,7 @@ import { Button, Paper } from "@mui/material";
 import * as React from "react";
 import { dataWikiCat } from "../../../constants/dataWikiCat.js";
 import { Link } from "react-router-dom";
+import Box from "@mui/material/Box";
 
 const CatWiki = () => {
   return (
@@ -18,7 +19,8 @@ const CatWiki = () => {
           marginRight: "auto",
         }}
       >
-        <span
+        <Box
+          component="span"
           style={{
             marginTop: 10,
             fontSize: "-webkit-xxx-large",
@@ -27,7 +29,7 @@ const CatWiki = () => {
           }}
         >
           ~ КОТОПЕДИЯ ~
-        </span>
+        </Box>
       </Paper>
 
       <Link to="/" style={{ marginLeft: 50, textDecoration: "none" }}>
@@ -45,11 +47,12 @@ const CatWiki = () => {
             marginBottom: 10,
           }}
         >
-          <div>
+          <Box>
             <img src={`${elem.img}`} alt="FOTO" />
-          </div>
-          <div>
-            <span
+          </Box>
+          <Box>
+            <Box
+              component="span"
               style={{
                 display: "inline-block",
                 margin: 10,
@@ -58,10 +61,10 @@ const CatWiki = () => {
               }}
             >
               {elem.name}
-            </span>
+            </Box>
             <br />
-            <span>{elem.description}</span>
-          </div>
+            <Box component="span">{elem.description}</Box>
+          </Box>
         </Paper>
       ))}
     </>

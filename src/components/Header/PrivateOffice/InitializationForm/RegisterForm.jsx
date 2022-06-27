@@ -11,6 +11,7 @@ import getInfoUser from "../../../../service/GettingData/GetDataAccount.js";
 import Alert from "@mui/material/Alert";
 import Stack from "@mui/material/Stack";
 import axios from "axios";
+import Box from "@mui/material/Box";
 
 export default function RegisterForm() {
   const [openReg, setOpenReg] = React.useState(false);
@@ -151,7 +152,7 @@ export default function RegisterForm() {
                 />
               )}
             />
-            <div>
+            <Box>
               <Controller
                 name="confirmPass"
                 control={control}
@@ -180,8 +181,8 @@ export default function RegisterForm() {
               ) : (
                 ""
               )}
-            </div>
-            <div>
+            </Box>
+            <Box>
               <Controller
                 name="email"
                 control={control}
@@ -205,7 +206,7 @@ export default function RegisterForm() {
               ) : (
                 ""
               )}
-            </div>
+            </Box>
           </DialogContent>
           <DialogActions>
             <Button onClick={handleClose}>Закрыть</Button>

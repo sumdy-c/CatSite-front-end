@@ -3,6 +3,7 @@ import { Paper } from "@mui/material";
 import { Outlet } from "react-router";
 import Footer from "../Footer/Footer";
 import PrivateOffice from "./PrivateOffice/PrivateOffice.jsx";
+import Box from "@mui/material/Box";
 
 const Header = () => {
   return (
@@ -18,7 +19,8 @@ const Header = () => {
         }}
       >
         <PrivateOffice />
-        <span
+        <Box
+          component="span"
           style={{
             marginTop: 10,
             marginLeft: 500,
@@ -29,7 +31,7 @@ const Header = () => {
           }}
         >
           THE MEOW SHOP
-        </span>
+        </Box>
       </Paper>
       <Outlet />
       <Footer />

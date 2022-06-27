@@ -1,3 +1,4 @@
+import { Box } from "@mui/material";
 import * as React from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
@@ -19,7 +20,7 @@ const MainPageMenu = () => {
   };
 
   return (
-    <div
+    <Box
       style={{
         display: "flex",
         justifyContent: "center",
@@ -34,7 +35,7 @@ const MainPageMenu = () => {
           marginRight: 0,
         }}
       >
-        <div
+        <Box
           onMouseOver={isMouseFocusRnt}
           onMouseOut={isMouseNoFocusRnt}
           style={{
@@ -46,9 +47,10 @@ const MainPageMenu = () => {
             backgroundSize: 1000,
             opacity: focusrnt,
           }}
-        ></div>
+        ></Box>
 
-        <span
+        <Box
+          component="span"
           onMouseOver={isMouseFocusRnt}
           onMouseOut={isMouseNoFocusRnt}
           style={{
@@ -63,7 +65,7 @@ const MainPageMenu = () => {
           }}
         >
           АРЕНДОВАТЬ КОТИКА
-        </span>
+        </Box>
       </Link>
       <Link
         to="catwiki"
@@ -74,7 +76,7 @@ const MainPageMenu = () => {
           marginRight: 0,
         }}
       >
-        <div
+        <Box
           onMouseOver={isMouseFocusWiki}
           onMouseOut={isMouseNoFocusWiki}
           style={{
@@ -86,8 +88,9 @@ const MainPageMenu = () => {
             backgroundSize: 1000,
             opacity: focuswiki,
           }}
-        ></div>
-        <span
+        ></Box>
+        <Box
+          component="span"
           onMouseOver={isMouseFocusWiki}
           onMouseOut={isMouseNoFocusWiki}
           style={{
@@ -102,9 +105,9 @@ const MainPageMenu = () => {
           }}
         >
           КОТОПЕДИЯ
-        </span>
+        </Box>
       </Link>
-    </div>
+    </Box>
   );
 };
 export default MainPageMenu;

@@ -3,6 +3,7 @@ import { styled } from "@mui/material/styles";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import DoneOutlineIcon from "@mui/icons-material/DoneOutline";
+import InputLabel from "@mui/material/InputLabel";
 
 const Input = styled("input")({
   display: "none",
@@ -23,7 +24,7 @@ const UploadPhoto = ({ setImg, sendfile, img }) => {
       alignItems="center"
       spacing={2}
     >
-      <label>
+      <InputLabel>
         <Input
           accept="image/*"
           multiple
@@ -33,7 +34,7 @@ const UploadPhoto = ({ setImg, sendfile, img }) => {
         <Button variant="contained" component="span">
           Выбрать фотографию
         </Button>
-      </label>
+      </InputLabel>
       <Button
         variant="contained"
         component="span"
@@ -44,9 +45,9 @@ const UploadPhoto = ({ setImg, sendfile, img }) => {
         Загрузить фотографию
       </Button>
       {doneUpload ? <DoneOutlineIcon color="success" /> : ""}
-      <label>
+      <InputLabel>
         <Input accept="image/*" type="file" />
-      </label>
+      </InputLabel>
     </Stack>
   );
 };

@@ -3,7 +3,7 @@ import Button from "@mui/material/Button";
 import * as React from "react";
 import { ButtonGroup } from "@mui/material";
 import { Link } from "react-router-dom";
-
+import Box from "@mui/material/Box";
 export default function SettingPanelCat({ isOpen, setBooked }) {
   const [variantAll, setVariantAll] = React.useState("contained");
   const [variantbooked, setVariantbooked] = React.useState("text");
@@ -53,7 +53,9 @@ export default function SettingPanelCat({ isOpen, setBooked }) {
       <Link to="/" style={{ textDecoration: "none" }}>
         <Button size="large">Вернуться на главную страницу</Button>
       </Link>
-      <span style={{ marginLeft: 10 }}>🆃🅷🅴 | 🅼🅴🅾🆆 | 🆂🅷🅾🅿</span>
+      <Box component="span" style={{ marginLeft: 10 }}>
+        🆃🅷🅴 | 🅼🅴🅾🆆 | 🆂🅷🅾🅿
+      </Box>
       <ButtonGroup disableElevation variant={`${variantFree}`}>
         <Button onClick={VisibleFreebookedCat}>
           Досупные для бронирования

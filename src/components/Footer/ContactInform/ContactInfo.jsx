@@ -20,7 +20,7 @@ import Personal from "./Personal.js";
 import { useForm, Controller } from "react-hook-form";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
+
 import getData from "../../../service/GettingData/GetDataContact";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -89,7 +89,7 @@ export default function ContactInfoDialog() {
   };
 
   return (
-    <div>
+    <>
       <Button variant="text" onClick={handleClickOpen} size="large">
         Открыть контактную информацию
       </Button>
@@ -145,13 +145,13 @@ export default function ContactInfoDialog() {
                 padding: 10,
               }}
             >
-              <div>
+              <Box>
                 <section>
                   <Controller
                     control={control}
                     name="Person"
                     render={({ field }) => (
-                      <FormControl fullWidth>
+                      <form fullWidth>
                         <InputLabel>Кому отправить ваше сообщение ?</InputLabel>
                         <Select
                           label="Кому отправить ваше сообщение ?"
@@ -167,12 +167,12 @@ export default function ContactInfoDialog() {
                             </MenuItem>
                           ))}
                         </Select>
-                      </FormControl>
+                      </form>
                     )}
                   />
                 </section>
-              </div>
-              <div>
+              </Box>
+              <Box>
                 <Controller
                   name="firstName"
                   control={control}
@@ -187,8 +187,8 @@ export default function ContactInfoDialog() {
                     />
                   )}
                 />
-              </div>
-              <div>
+              </Box>
+              <Box>
                 <Controller
                   name="question"
                   control={control}
@@ -203,8 +203,8 @@ export default function ContactInfoDialog() {
                     />
                   )}
                 />
-              </div>
-              <div>
+              </Box>
+              <Box>
                 <Controller
                   name="contactInfo"
                   control={control}
@@ -219,7 +219,7 @@ export default function ContactInfoDialog() {
                     />
                   )}
                 />
-              </div>
+              </Box>
 
               <Button
                 variant="contained"
@@ -274,6 +274,6 @@ export default function ContactInfoDialog() {
           </Grid>
         </List>
       </Dialog>
-    </div>
+    </>
   );
 }
