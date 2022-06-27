@@ -10,7 +10,7 @@ const EditCat = (state, avatar, key, data) => {
     catPhoto: avatar ? getEditImg : oldEl.catPhoto,
     ageCat: age,
     catColor: color,
-    CatPriceInHour: price,
+    catPriceInHour: price,
     infoCat: info,
   };
   const newArrEdit = [

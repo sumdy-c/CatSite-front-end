@@ -1,10 +1,10 @@
 import * as React from "react";
-import SettingPanelCat from "../../SettingPanelCat/SettingPanelCat";
-import CatForm from "../../CatForm/CatForm.jsx";
+import SettingPanelCat from "./SettingPanelCat/SettingPanelCat";
+import CatForm from "./CatForm/CatForm.jsx";
 import { useState, useReducer } from "react";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
-import FormDialog from "../../FormDialog/FormDialog";
+import FormDialog from "./FormDialog/FormDialog";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 import Paggination from "../../../service/Paggination.js";
@@ -12,7 +12,6 @@ import axios from "axios";
 import dataCat from "../../../constants/DataCat.js";
 import Services from "../../../service/Service";
 import filterCat from "../../../service/FilterCat";
-import PrivateOffice from "../../PrivateOffice/PrivateOffice";
 
 // Запуск серверной части с помощью Web Server For Chrome.
 const ChooseCatPage = () => {
@@ -75,7 +74,7 @@ const ChooseCatPage = () => {
   return (
     <>
       <SettingPanelCat isOpen={setOpen} setBooked={setBooked} />
-      <PrivateOffice />
+
       <FormDialog
         newCat={(data) => dispatch({ type: "add", data, avatar: avatar })}
         open={open}

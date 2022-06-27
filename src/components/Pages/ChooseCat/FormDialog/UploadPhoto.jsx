@@ -23,10 +23,9 @@ const UploadPhoto = ({ setImg, sendfile, img }) => {
       alignItems="center"
       spacing={2}
     >
-      <label htmlFor="contained-button-file">
+      <label>
         <Input
           accept="image/*"
-          id="contained-button-file"
           multiple
           type="file"
           onChange={(e) => setImg(e.target.files[0])}
@@ -45,8 +44,8 @@ const UploadPhoto = ({ setImg, sendfile, img }) => {
         Загрузить фотографию
       </Button>
       {doneUpload ? <DoneOutlineIcon color="success" /> : ""}
-      <label htmlFor="icon-button-file">
-        <Input accept="image/*" id="icon-button-file" type="file" />
+      <label>
+        <Input accept="image/*" type="file" />
       </label>
     </Stack>
   );

@@ -12,7 +12,6 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { red } from "@mui/material/colors";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { Container } from "@mui/material";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
 import Grow from "@mui/material/Grow";
@@ -28,6 +27,8 @@ import Snackbar from "@mui/material/Snackbar";
 import Fade from "@mui/material/Fade";
 import Slide from "@mui/material/Slide";
 import AlertDialog from "./AlertDialog.jsx";
+import MenuIcon from "@mui/icons-material/Menu";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -141,24 +142,19 @@ export default function CatForm({
     <>
       <Card sx={{ maxWidth: 345 }} id={`${id}`}>
         <CardHeader
-          avatar={
-            <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-              Кот
-            </Avatar>
-          }
+          avatar={<Avatar sx={{ bgcolor: red[500] }}>Кот</Avatar>}
           action={
             <Stack direction="row" spacing={2}>
               <div>
-                <MoreVertIcon
+                <IconButton
                   ref={anchorRef}
-                  id="composition-button"
                   aria-controls={open ? "composition-menu" : undefined}
                   aria-expanded={open ? "true" : undefined}
                   aria-haspopup="true"
                   onClick={handleToggle}
                 >
-                  Меню
-                </MoreVertIcon>
+                  {!open ? <MenuIcon /> : <MoreVertIcon />}
+                </IconButton>
 
                 <Popper
                   open={open}
@@ -182,8 +178,6 @@ export default function CatForm({
                         <ClickAwayListener onClickAway={handleClose}>
                           <MenuList
                             autoFocusItem={open}
-                            id="composition-menu"
-                            aria-labelledby="composition-button"
                             onKeyDown={handleListKeyDown}
                           >
                             <MenuItem onClick={formCreateOpen}>
@@ -228,18 +222,13 @@ export default function CatForm({
           <Button variant="text" onClick={handleClickbooked(SlideTransition)}>
             {checked ? <p>Снять бронь!</p> : <p>Забронировать котика!</p>}
           </Button>
+
           <Checkbox
-            id="checkbox1"
             icon={<BookmarkBorderIcon />}
             checkedIcon={<BookmarkIcon />}
             checked={checked}
           />
-          <ExpandMore
-            expand={expanded}
-            onClick={handleExpandClick}
-            aria-expanded={expanded}
-            aria-label="show more"
-          >
+          <ExpandMore expand={expanded} onClick={handleExpandClick}>
             <ExpandMoreIcon />
           </ExpandMore>
         </CardActions>

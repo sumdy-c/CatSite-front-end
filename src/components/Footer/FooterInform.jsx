@@ -35,22 +35,10 @@ export default function ScrollDialog() {
         © 2001–2022, ООО "МяуШоп"
       </Button>
 
-      <Dialog
-        open={open}
-        onClose={handleClose}
-        scroll={scroll}
-        aria-labelledby="scroll-dialog-title"
-        aria-describedby="scroll-dialog-description"
-      >
-        <DialogTitle id="scroll-dialog-title">
-          Юридическая информация
-        </DialogTitle>
+      <Dialog open={open} onClose={handleClose} scroll={scroll}>
+        <DialogTitle>Юридическая информация</DialogTitle>
         <DialogContent dividers={scroll === "paper"}>
-          <DialogContentText
-            id="scroll-dialog-description"
-            ref={descriptionElementRef}
-            tabIndex={-1}
-          >
+          <DialogContentText ref={descriptionElementRef} tabIndex={-1}>
             {[...new Array(50)]
               .map(
                 () => `Очень много скучной юридической информации которая не несёт полезную нагрузку и нужна лишь для исключительных ситуаций когда дело доходит до суда.

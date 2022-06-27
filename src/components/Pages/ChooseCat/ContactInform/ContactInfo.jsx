@@ -118,7 +118,6 @@ export default function ContactInfoDialog() {
               size="large"
               color="inherit"
               onClick={handleClose}
-              aria-label="close"
             >
               <CloseIcon />
             </IconButton>
@@ -153,11 +152,8 @@ export default function ContactInfoDialog() {
                     name="Person"
                     render={({ field }) => (
                       <FormControl fullWidth>
-                        <InputLabel id="person-select-label">
-                          Кому отправить ваше сообщение ?
-                        </InputLabel>
+                        <InputLabel>Кому отправить ваше сообщение ?</InputLabel>
                         <Select
-                          labelId="person-select-label"
                           label="Кому отправить ваше сообщение ?"
                           {...field}
                           style={{

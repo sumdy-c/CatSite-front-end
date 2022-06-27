@@ -1,8 +1,7 @@
 import { Paper } from "@mui/material";
 import { Typography } from "@mui/material";
 import ScrollDialog from "./FooterInform.jsx";
-import ContactInfoDialog from "../ContactInform/ContactInfo.jsx";
-import { Outlet } from "react-router";
+import ContactInfoDialog from "./ContactInform/ContactInfo.jsx";
 
 const Footer = () => {
   return (

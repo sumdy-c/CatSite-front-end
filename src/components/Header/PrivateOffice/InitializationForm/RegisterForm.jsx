@@ -7,7 +7,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { useForm, Controller } from "react-hook-form";
-import getInfoUser from "../GettingData/GetDataAccount.js";
+import getInfoUser from "../../../../service/GettingData/GetDataAccount.js";
 import Alert from "@mui/material/Alert";
 import Stack from "@mui/material/Stack";
 import axios from "axios";
@@ -116,6 +116,7 @@ export default function RegisterForm() {
               Дорогие друзья, будьте внимательны при заполнении формы
               регистрации!
             </DialogContentText>
+
             <Controller
               name="firstName"
               control={control}

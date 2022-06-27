@@ -1,10 +1,10 @@
 import * as React from "react";
 import Paper from "@mui/material/Paper";
-import LoginForm from "../InitializationForm/LoginForm.jsx";
-import RegisterForm from "../InitializationForm/RegisterForm.jsx";
+import LoginForm from "./InitializationForm/LoginForm.jsx";
+import RegisterForm from "./InitializationForm/RegisterForm.jsx";
 import UserCard from "./UserCard.jsx";
 import axios from "axios";
-import Decryption from "../Cryptografy/Decryption.js";
+import Decryption from "../../../service/Cryptografy/Decryption.js";
 
 export default function PrivateOffice() {
   const [autorization, setAutorization] = React.useState(false);
@@ -39,12 +39,8 @@ export default function PrivateOffice() {
       elevation={12}
       style={{
         width: "max-content",
-        marginLeft: 15,
-        padding: 0,
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        position: "absolute",
+        marginLeft: 25,
+        marginBottom: 15,
       }}
     >
       {autorization ? (

@@ -4,6 +4,7 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+import { Paper } from "@mui/material";
 
 export default function UserCard({ userNameCard, setAutorization }) {
   const [exit, setExit] = React.useState(false);
@@ -21,7 +22,14 @@ export default function UserCard({ userNameCard, setAutorization }) {
   };
 
   return (
-    <>
+    <div
+      style={{
+        display: "flex",
+        flexWrap: "wrap",
+        alignItems: "flex-end",
+        flexDirection: "row",
+      }}
+    >
       <Card sx={{ minWidth: 275 }}>
         <CardContent>
           <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
@@ -44,7 +52,7 @@ export default function UserCard({ userNameCard, setAutorization }) {
         </CardActions>
       </Card>
       {exit ? (
-        <>
+        <Paper style={{ marginRight: -260 }}>
           <Button
             color="error"
             style={{ width: "-webkit-fill-available", padding: 10 }}
@@ -58,8 +66,8 @@ export default function UserCard({ userNameCard, setAutorization }) {
           >
             Отмена
           </Button>
-        </>
+        </Paper>
       ) : null}
-    </>
+    </div>
   );
 }

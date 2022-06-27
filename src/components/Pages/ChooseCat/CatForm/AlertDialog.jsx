@@ -11,22 +11,22 @@ export default function AlertDialog({ modalOpen, modal, deleteCatConfirm }) {
     modalOpen(false);
   };
 
-  const handleDelete = () => {  
+  const handleDelete = () => {
     handleClose();
     deleteCatConfirm();
   };
-  
+
   return (
     <div>
       <Dialog
         open={modal}
         onClose={handleClose}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
+        // aria-labelledby="alert-dialog-title"
+        // aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">{"Удалить кота ?"}</DialogTitle>
+        <DialogTitle>{"Удалить кота ?"}</DialogTitle>
         <DialogContent>
-          <DialogContentText id="alert-dialog-description">
+          <DialogContentText>
             Вы точно уверены что хотите удалить котика ? Все данные будут
             утеряны!!!
           </DialogContentText>
