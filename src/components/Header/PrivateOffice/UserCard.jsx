@@ -31,7 +31,7 @@ export default function UserCard({ userNameCard, setAutorization }) {
         flexDirection: "row",
       }}
     >
-      <Card sx={{ minWidth: 275 }}>
+      <Card sx={{ minWidth: 275 }} style={{ display: "flex" }}>
         <CardContent>
           <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
             Это вы, и вы прекрасны!

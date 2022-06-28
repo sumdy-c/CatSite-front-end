@@ -12,24 +12,13 @@ import Alert from "@mui/material/Alert";
 import Stack from "@mui/material/Stack";
 import axios from "axios";
 import Box from "@mui/material/Box";
+import { useValidName } from "./validNamesHook.js";
+import { validateRegister } from "./validateRegister.js";
 
 export default function RegisterForm() {
   const [openReg, setOpenReg] = React.useState(false);
   const [valid, setValid] = React.useState(false);
   const [alertReg, setAlertReg] = React.useState(false);
-  let namesValid = [];
-  axios
-    .get("http://localhost:3001/users")
-    .then((res) => {
-      res.data.forEach((item) => {
-        namesValid.push(item.name);
-      });
-    })
-    .catch((error) => {
-      console.log(error);
-      return null;
-    });
-
   const { control, reset, handleSubmit, register } = useForm({
     defaultValues: {
       firstName: "",
@@ -38,62 +27,70 @@ export default function RegisterForm() {
       email: "",
     },
   });
-
-  const validNewName = (name) => {
-    let validname = namesValid.findIndex((item) => item === name);
-    if (validname === -1) {
-      return true;
-    } else {
-      return false;
-    }
-  };
-
   const handleClickOpen = () => {
     setOpenReg(true);
     reset();
   };
-
   const handleClose = () => {
     setOpenReg(false);
     reset();
   };
+  let dataName = useValidName();
+  // axios
+  //   .get("http://localhost:3001/users")
+  //   .then((res) => {
+  //     res.data.forEach((item) => {
+  //       namesValid.push(item.name);
+  //     });
+  //   })
+  //   .catch((error) => {
+  //     console.log(error);
+  //     return null;
+  //   });
 
-  const onSubmit = async (data) => {
-    if (
-      validateEmail(data.email) &&
-      validatePass(data.password, data.confirmPass) &&
-      validNewName(data.firstName)
-    ) {
-      handleClose();
-      setValid(false);
-      getInfoUser(data.firstName, data.password, data.email);
-      reset();
-      setAlertReg(true);
-      setTimeout(() => {
-        setAlertReg(false);
-      }, 2000);
-    } else {
-      setValid(true);
-      console.log("Тут ошибка!");
-    }
-  };
+  //   const validNewName = (name) => {
+  //   let validname = namesValid.findIndex((item) => item === name);
+  //   if (validname === -1) {
+  //     return true;
+  //   } else {
+  //     return false;
+  //   }
+  // };
+  // const onSubmit = async (data) => {
+  //   if (
+  //     validateEmail(data.email) &&
+  //     validatePass(data.password, data.confirmPass) &&
+  //     validNewName(data.firstName)
+  //   ) {
+  //     handleClose();
+  //     setValid(false);
+  //     getInfoUser(data.firstName, data.password, data.email);
+  //     reset();
+  //     setAlertReg(true);
+  //     setTimeout(() => {
+  //       setAlertReg(false);
+  //     }, 2000);
+  //   } else {
+  //     setValid(true);
+  //     console.log("Тут ошибка!");
+  //   }
+  // };
 
-  const validateEmail = (email) => {
-    return String(email)
-      .toLowerCase()
-      .match(
-        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-      );
-  };
+  // const validateEmail = (email) => {
+  //   return String(email)
+  //     .toLowerCase()
+  //     .match(
+  //       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+  //     );
+  // };
 
-  const validatePass = (pass, confirmPass) => {
-    if (pass.length < 6 || !pass.match(/^\s*(\w+)\s*$/)) {
-      return false;
-    } else {
-      return pass === confirmPass ? true : false;
-    }
-  };
-
+  // const validatePass = (pass, confirmPass) => {
+  //   if (pass.length < 6 || !pass.match(/^\s*(\w+)\s*$/)) {
+  //     return false;
+  //   } else {
+  //     return pass === confirmPass ? true : false;
+  //   }
+  // };
   return (
     <>
       {alertReg ? (
@@ -111,7 +108,18 @@ export default function RegisterForm() {
       )}
       <Dialog open={openReg} onClose={handleClose}>
         <DialogTitle>Регистрация</DialogTitle>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form
+          onSubmit={handleSubmit((data) => {
+            validateRegister(
+              data,
+              dataName,
+              reset,
+              setAlertReg,
+              setValid,
+              handleClose
+            );
+          })}
+        >
           <DialogContent>
             <DialogContentText>
               Дорогие друзья, будьте внимательны при заполнении формы
@@ -174,10 +182,10 @@ export default function RegisterForm() {
                 )}
               />
               {valid ? (
-                <p style={{ color: "red" }}>
+                <Box component="p" style={{ color: "red" }}>
                   Пароли должны совпадать! Используйте только латиницу, цифры и
                   символы - [ / , ? , ! , $ , @ , % , ^ , * , ) , ( ]
-                </p>
+                </Box>
               ) : (
                 ""
               )}
@@ -199,10 +207,10 @@ export default function RegisterForm() {
                 )}
               />
               {valid ? (
-                <p style={{ color: "red" }}>
+                <Box component="p" style={{ color: "red" }}>
                   Проверьте корректность ввода электронной почты! Возможно такое
                   имя аккаунта уже существует!!!
-                </p>
+                </Box>
               ) : (
                 ""
               )}

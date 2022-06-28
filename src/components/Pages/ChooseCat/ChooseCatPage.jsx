@@ -69,12 +69,10 @@ const ChooseCatPage = () => {
   const getPageCount = (e, page) => {
     setPage(page);
   };
-
   visibleCard = Paggination(visibleCard, page);
   return (
     <>
       <SettingPanelCat isOpen={setOpen} setBooked={setBooked} />
-
       <FormDialog
         newCat={(data) => dispatch({ type: "add", data, avatar: avatar })}
         open={open}

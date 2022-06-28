@@ -1,12 +1,19 @@
 import { Button, Paper } from "@mui/material";
 import * as React from "react";
 import { dataWikiCat } from "../../../constants/dataWikiCat.js";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
+import { Link } from "react-scroll";
 
 const CatWiki = () => {
+  const navigate = useNavigate();
+  const goMain = () => {
+    navigate("/", { replace: true });
+  };
+
   return (
     <>
+      <label className="start" />
       <Paper
         style={{
           display: "flex",
@@ -32,9 +39,27 @@ const CatWiki = () => {
         </Box>
       </Paper>
 
-      <Link to="/" style={{ marginLeft: 50, textDecoration: "none" }}>
-        <Button variant="contained">
-          <p>Вернуться на главную страницу</p>
+      <Button
+        variant="contained"
+        style={{ marginLeft: 25, marginBottom: 15 }}
+        onClick={goMain}
+      >
+        <Box component="p">Вернуться на главную страницу</Box>
+      </Button>
+
+      <Link
+        activeClass="active"
+        to="start"
+        spy={true}
+        smooth={true}
+        offset={-500}
+        duration={500}
+      >
+        <Button
+          variant="contained"
+          style={{ position: "fixed", right: 30, bottom: "10%", width: 150 }}
+        >
+          В начало
         </Button>
       </Link>
       {dataWikiCat.map((elem, key) => (

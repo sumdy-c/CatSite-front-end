@@ -20,18 +20,14 @@ import Personal from "./Personal.js";
 import { useForm, Controller } from "react-hook-form";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
-
-import getData from "../../../service/GettingData/GetDataContact";
+import { SendForm } from "./validateContactForm.js";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
-
 export default function ContactInfoDialog() {
   const [open, setOpen] = React.useState(false);
-  const [valid, setValid] = React.useState(false);
-
-  const [viewMes, setViewMes] = React.useState(false);
+  const [valid, setValid] = React.useState(null);
   const { control, reset, handleSubmit } = useForm({
     defaultValues: {
       firstName: "",
@@ -40,54 +36,19 @@ export default function ContactInfoDialog() {
       Person: "",
     },
   });
-
-  const onSubmit = (data) => {
-    if (
-      validateEmail(data.contactInfo) &&
-      validateName(data.firstName) &&
-      validateQuestion(data.question) &&
-      validatePerson(data.Person)
-    ) {
-      setValid(false);
-      getData(data);
-      reset();
-      setViewMes(true);
-      setTimeout(() => {
-        setViewMes(false);
-      }, 2000);
-    } else {
-      setViewMes(false);
-      setValid(true);
-    }
-  };
-
-  const validatePerson = (val) => {
-    return val !== "";
-  };
-  const validateQuestion = (ques) => {
-    return ques.length !== 0;
-  };
-  const validateName = (name) => {
-    return name.length !== 0;
-  };
-  const validateEmail = (email) => {
-    return String(email)
-      .toLowerCase()
-      .match(
-        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-      );
-  };
-
   const handleClickOpen = () => {
     setOpen(true);
   };
-
   const handleClose = () => {
     setOpen(false);
-    setValid(false);
     reset();
   };
 
+  if (valid !== null) {
+    setTimeout(() => {
+      setValid(null);
+    }, 2000);
+  }
   return (
     <>
       <Button variant="text" onClick={handleClickOpen} size="large">
@@ -133,7 +94,7 @@ export default function ContactInfoDialog() {
           }}
         >
           <form
-            onSubmit={handleSubmit(onSubmit)}
+            onSubmit={handleSubmit((data) => SendForm(data, reset, setValid))}
             style={{
               marginBottom: 30,
               marginTop: 30,
@@ -159,7 +120,7 @@ export default function ContactInfoDialog() {
                           style={{
                             width: 600,
                           }}
-                          error={valid}
+                          error={valid === "err"}
                         >
                           {Personal.map((el) => (
                             <MenuItem key={el.key} value={el.value}>
@@ -178,7 +139,7 @@ export default function ContactInfoDialog() {
                   control={control}
                   render={({ field: { onChange, value } }) => (
                     <TextField
-                      error={valid}
+                      error={valid === "err"}
                       label="Ваше имя"
                       variant="filled"
                       onChange={onChange}
@@ -194,7 +155,7 @@ export default function ContactInfoDialog() {
                   control={control}
                   render={({ field: { onChange, value } }) => (
                     <TextField
-                      error={valid}
+                      error={valid === "err"}
                       label="Ваш вопрос"
                       variant="filled"
                       onChange={onChange}
@@ -210,7 +171,7 @@ export default function ContactInfoDialog() {
                   control={control}
                   render={({ field: { onChange, value } }) => (
                     <TextField
-                      error={valid}
+                      error={valid === "err"}
                       label="Укажите свою электронную почту"
                       variant="filled"
                       onChange={onChange}
@@ -232,17 +193,17 @@ export default function ContactInfoDialog() {
               >
                 Отправить!
               </Button>
-              {valid ? (
-                <p style={{ color: "red", marginLeft: 130 }}>
+              {valid === "err" ? (
+                <Box component="p" style={{ color: "red", marginLeft: 130 }}>
                   Проверьте правильность заполнения формы!
-                </p>
+                </Box>
               ) : (
                 ""
               )}
-              {viewMes ? (
-                <p style={{ color: "green", marginLeft: 10 }}>
+              {valid === "done" ? (
+                <Box component="p" style={{ color: "green", marginLeft: 10 }}>
                   Мы получили ваше сообщение и ответим как можно скорее!!!
-                </p>
+                </Box>
               ) : (
                 ""
               )}

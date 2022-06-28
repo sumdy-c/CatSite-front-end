@@ -6,6 +6,7 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import { useForm, Controller } from "react-hook-form";
+import Box from "@mui/material/Box";
 
 export default function LoginForm({ LoginUser, correctData, setCorrectData }) {
   const [openLogin, setOpenLogin] = React.useState(false);
@@ -42,7 +43,11 @@ export default function LoginForm({ LoginUser, correctData, setCorrectData }) {
 
   return (
     <>
-      <Button variant="text" onClick={handleClickOpen} style={{ margin: 5 }}>
+      <Button
+        variant="text"
+        onClick={handleClickOpen}
+        style={{ margin: 5, width: "-webkit-fill-available" }}
+      >
         Войти в личный кабинет
       </Button>
       <Dialog open={openLogin} onClose={handleClose}>
@@ -77,10 +82,10 @@ export default function LoginForm({ LoginUser, correctData, setCorrectData }) {
               )}
             />
             {correctData === "NoCorrect" ? (
-              <p style={{ color: "red" }}>
+              <Box component="p" style={{ color: "red" }}>
                 Проверьте вводимую информацию!!! Аккаунт с такими параметрами не
                 найден в системе!
-              </p>
+              </Box>
             ) : (
               ""
             )}

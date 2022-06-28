@@ -16,8 +16,9 @@ import UploadPhoto from "./UploadPhoto.jsx";
 import { breedData } from "../../../../constants/breedData.js";
 import { colorData } from "../../../../constants/colorData";
 import { useForm, Controller } from "react-hook-form";
-import validSetting from "../../../../service/Validation.js";
 import { useState } from "react";
+import { useToggleTitle } from "./toggleTitle.js";
+import { sendForm } from "./sendForm.js";
 
 export default function FormDialog({
   newCat,
@@ -48,33 +49,22 @@ export default function FormDialog({
       info: "",
     },
   });
-  const onSubmit = (data) => {
-    if (validSetting(data) === true) {
-      if (open === "editCat") {
-        funcEditCard(trackerEditID, data);
-        handleClose();
-      } else {
-        newCat(data);
-        handleClose();
-      }
-    } else {
-      setValid(validSetting(data));
-      return;
-    }
-  };
-
-  // выбор титульника
-  let title =
-    open === "addCat" ? "Добавление котика" : "Изменение информации о котике";
-  let dialogContent =
-    open !== "editCat"
-      ? "Пожалуйста укажите всю информацию о вашем питомце"
-      : "Обращаем ваше внимание, изменения в карточке котика отменить нельзя!";
-  const isDialogOpen = open === "addCat" || open === "editCat";
-
+  const { title, dialogContent, isDialogOpen } = useToggleTitle(open);
   return (
     <Dialog open={isDialogOpen} onClose={handleClose}>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form
+        onSubmit={handleSubmit((data) => {
+          sendForm(
+            data,
+            open,
+            funcEditCard,
+            handleClose,
+            newCat,
+            setValid,
+            trackerEditID
+          );
+        })}
+      >
         <DialogTitle>{`${title}`}</DialogTitle>
         <DialogContent>
           <DialogContentText>{`${dialogContent}`}</DialogContentText>

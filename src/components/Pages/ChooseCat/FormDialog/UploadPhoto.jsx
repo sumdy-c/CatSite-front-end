@@ -11,12 +11,10 @@ const Input = styled("input")({
 
 const UploadPhoto = ({ setImg, sendfile, img }) => {
   const [doneUpload, setDoneUpload] = React.useState(false);
-
   const accessUpload = () => {
     sendfile();
     setDoneUpload(true);
   };
-
   return (
     <Stack
       style={{ justifyContent: "center", paddingTop: 25 }}

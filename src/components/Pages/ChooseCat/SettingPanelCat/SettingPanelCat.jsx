@@ -4,6 +4,7 @@ import * as React from "react";
 import { ButtonGroup } from "@mui/material";
 import { Link } from "react-router-dom";
 import Box from "@mui/material/Box";
+
 export default function SettingPanelCat({ isOpen, setBooked }) {
   const [variantAll, setVariantAll] = React.useState("contained");
   const [variantbooked, setVariantbooked] = React.useState("text");

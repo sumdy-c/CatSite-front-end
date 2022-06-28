@@ -70,31 +70,25 @@ export default function CatForm({
     open: false,
     Transition: Fade,
   });
-
   const prevOpen = React.useRef(open);
-
   React.useEffect(() => {
     if (prevOpen.current === true && open === false) {
       anchorRef.current.focus();
     }
     prevOpen.current = open;
   }, [open]);
-
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
-
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
   };
-
   const handleClose = (event) => {
     if (anchorRef.current && anchorRef.current.contains(event.target)) {
       return;
     }
     setOpen(false);
   };
-
   function handleListKeyDown(event) {
     if (event.key === "Tab") {
       event.preventDefault();
@@ -103,7 +97,6 @@ export default function CatForm({
       setOpen(false);
     }
   }
-
   const handleClickbooked = (Transition) => () => {
     togglebooked();
     ToggleCheckBox();
@@ -112,33 +105,27 @@ export default function CatForm({
       Transition,
     });
   };
-
   const handleCloseMes = () => {
     setState({
       ...state,
       open: false,
     });
   };
-
   const ToggleCheckBox = () => {
     setChecked(!checked);
   };
-
   const handleDeleteCat = (e) => {
     handleClose(e);
     setIsModalOpen(true);
   };
-
   const formCreateOpen = (e) => {
     setOpens("editCat");
     handleClose(e);
     setTrackerEditID();
   };
-
   const preloader = () => {
     setLoading(true);
   };
-
   return (
     <>
       <Card sx={{ maxWidth: 345 }} id={`${id}`}>
@@ -221,7 +208,11 @@ export default function CatForm({
         </CardContent>
         <CardActions disableSpacing>
           <Button variant="text" onClick={handleClickbooked(SlideTransition)}>
-            {checked ? <p>Снять бронь!</p> : <p>Забронировать котика!</p>}
+            {checked ? (
+              <Box component="p">Снять бронь!</Box>
+            ) : (
+              <Box component="p">Забронировать котика!</Box>
+            )}
           </Button>
 
           <Checkbox

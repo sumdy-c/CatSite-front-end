@@ -22,8 +22,8 @@ const Header = () => {
         <Box
           component="span"
           style={{
-            marginTop: 10,
-            marginLeft: 500,
+            marginTop: 40,
+            marginLeft: 300,
             fontSize: "-webkit-xxx-large",
             fontStyle: "italic",
             fontFamily: "fantasy",
