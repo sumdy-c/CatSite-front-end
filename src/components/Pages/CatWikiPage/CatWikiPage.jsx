@@ -4,11 +4,20 @@ import { dataWikiCat } from "../../../constants/dataWikiCat.js";
 import { useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
 import { Link } from "react-scroll";
+import { motion } from "framer-motion";
 
 const CatWiki = () => {
   const navigate = useNavigate();
   const goMain = () => {
     navigate("/", { replace: true });
+  };
+  const listAnimate = {
+    hidden: {
+      opacity: 0,
+    },
+    visible: {
+      opacity: 1,
+    },
   };
   return (
     <>
@@ -61,8 +70,13 @@ const CatWiki = () => {
           В начало
         </Button>
       </Link>
+
       {dataWikiCat.map((elem, key) => (
         <Paper
+          component={motion.div}
+          variants={listAnimate}
+          initial="hidden"
+          whileInView="visible"
           key={key}
           style={{
             display: "flex",

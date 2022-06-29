@@ -4,6 +4,7 @@ import * as React from "react";
 import { ButtonGroup } from "@mui/material";
 import { Link } from "react-router-dom";
 import Box from "@mui/material/Box";
+import { motion } from "framer-motion";
 
 export default function SettingPanelCat({ isOpen, setBooked }) {
   const [variantAll, setVariantAll] = React.useState("contained");
@@ -33,8 +34,21 @@ export default function SettingPanelCat({ isOpen, setBooked }) {
     setVariantFree("contained");
   };
 
+  const listAnimate = {
+    hidden: {
+      x: -100,
+    },
+    visible: {
+      x: 0,
+    },
+  };
+
   return (
     <Paper
+      component={motion.div}
+      initial="hidden"
+      whileInView="visible"
+      variants={listAnimate}
       elevation={8}
       style={{
         display: "flex",

@@ -30,6 +30,7 @@ import AlertDialog from "./AlertDialog.jsx";
 import MenuIcon from "@mui/icons-material/Menu";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Box from "@mui/material/Box";
+import { motion } from "framer-motion";
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -127,10 +128,25 @@ export default function CatForm({
   const preloader = () => {
     setLoading(true);
   };
+  const listAnimate = {
+    hidden: {
+      opacity: 0,
+    },
+    visible: {
+      opacity: 1,
+    },
+  };
 
   return (
     <>
-      <Card sx={{ maxWidth: 345 }} id={`${id}`}>
+      <Card
+        sx={{ maxWidth: 345 }}
+        id={`${id}`}
+        component={motion.div}
+        variants={listAnimate}
+        initial="hidden"
+        whileInView="visible"
+      >
         <CardHeader
           avatar={<Avatar sx={{ bgcolor: red[500] }}>Кот</Avatar>}
           action={
@@ -211,9 +227,21 @@ export default function CatForm({
         <CardActions disableSpacing>
           <Button variant="text" onClick={handleClickbooked(SlideTransition)}>
             {checked ? (
-              <Box component="p">Снять бронь!</Box>
+              <Box
+                component={motion.p}
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9, rotate: 360, duration: 0.1 }}
+              >
+                Снять бронь!
+              </Box>
             ) : (
-              <Box component="p">Забронировать котика!</Box>
+              <Box
+                component={motion.p}
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9, rotate: 360, duration: 0.1 }}
+              >
+                Забронировать котика!
+              </Box>
             )}
           </Button>
 
@@ -241,6 +269,7 @@ export default function CatForm({
           </CardContent>
         </Collapse>
       </Card>
+
       <Box>
         <Snackbar
           open={state.open}
