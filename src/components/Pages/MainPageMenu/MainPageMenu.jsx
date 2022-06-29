@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 const MainPageMenu = () => {
   const [focusrnt, setFocusrnt] = useState(0.2);
   const [focuswiki, setFocuswiki] = useState(0.2);
+
   const isMouseFocusWiki = () => {
     setFocuswiki(1);
   };

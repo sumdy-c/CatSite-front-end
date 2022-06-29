@@ -28,6 +28,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 export default function ContactInfoDialog() {
   const [open, setOpen] = React.useState(false);
   const [valid, setValid] = React.useState(null);
+
   const { control, reset, handleSubmit } = useForm({
     defaultValues: {
       firstName: "",
@@ -43,7 +44,6 @@ export default function ContactInfoDialog() {
     setOpen(false);
     reset();
   };
-
   if (valid !== null) {
     setTimeout(() => {
       setValid(null);

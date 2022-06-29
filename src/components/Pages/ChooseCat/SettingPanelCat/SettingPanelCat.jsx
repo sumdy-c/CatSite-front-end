@@ -13,6 +13,7 @@ export default function SettingPanelCat({ isOpen, setBooked }) {
   const handleClickOpen = () => {
     isOpen("addCat");
   };
+
   const VisiblebookedCat = () => {
     setBooked("booked");
     setVariantAll("text");

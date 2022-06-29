@@ -50,6 +50,7 @@ export default function FormDialog({
     },
   });
   const { title, dialogContent, isDialogOpen } = useToggleTitle(open);
+
   return (
     <Dialog open={isDialogOpen} onClose={handleClose}>
       <form

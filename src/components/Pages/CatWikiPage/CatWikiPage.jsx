@@ -10,7 +10,6 @@ const CatWiki = () => {
   const goMain = () => {
     navigate("/", { replace: true });
   };
-
   return (
     <>
       <label className="start" />

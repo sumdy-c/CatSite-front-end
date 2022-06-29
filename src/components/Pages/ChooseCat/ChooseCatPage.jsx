@@ -8,68 +8,32 @@ import FormDialog from "./FormDialog/FormDialog";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 import Paggination from "../../../service/Paggination.js";
-import axios from "axios";
 import dataCat from "../../../constants/DataCat.js";
-import Services from "../../../service/Service";
 import filterCat from "../../../service/FilterCat";
+import useSendFile from "./sendFileHook.js";
+import { reducer } from "./reducer";
 
 // Запуск серверной части с помощью Web Server For Chrome.
+
 const ChooseCatPage = () => {
-  // главный стейт
   const [state, dispatch] = useReducer(reducer, dataCat);
-  // вспомогательные технические стейты
-  const [img, setImg] = useState(null);
-  const [avatar, setAvatar] = useState(null);
   const [open, setOpen] = useState("closeModal");
   const [trackerEditID, setTrackerEditID] = useState(1);
   const [page, setPage] = useState(1);
   const [booked, setBooked] = useState("all");
 
-  function reducer(state, action) {
-    switch (action.type) {
-      case "delete":
-        return (state = Services.DeleteCat(state, action.key));
-      case "add":
-        return (state = Services.AddCat(action.data, action.avatar, state));
-      case "togglebooked":
-        return (state = Services.ToggleBooked(state, action.key));
-      case "edit":
-        return (state = Services.EditCat(
-          state,
-          action.avatar,
-          action.key,
-          action.data
-        ));
-      default:
-        return { ...state };
-    }
-  }
-
-  const sendfile = React.useCallback(async () => {
-    try {
-      const data = new FormData();
-      data.append("avatar", img);
-      await axios
-        .post("/api/upload/", data, {
-          headers: {
-            "content-type": "multipart/form-data",
-          },
-        })
-        .then((res) => {
-          setAvatar(res.data.path.slice(59));
-          setImg(null);
-        });
-    } catch (er) {
-      console.log(`Ошибка сервера : ${er}`);
-    }
-  }, [img]);
+  const { img, avatar, setImg, setAvatar, sendfile } = useSendFile();
 
   let visibleCard = filterCat(state, booked);
+
   const Count = Math.ceil(state.length / 6);
+
   const getPageCount = (e, page) => {
     setPage(page);
   };
+
   visibleCard = Paggination(visibleCard, page);
+
   return (
     <>
       <SettingPanelCat isOpen={setOpen} setBooked={setBooked} />

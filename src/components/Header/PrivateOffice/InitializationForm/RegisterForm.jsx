@@ -7,10 +7,8 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { useForm, Controller } from "react-hook-form";
-import getInfoUser from "../../../../service/GettingData/GetDataAccount.js";
 import Alert from "@mui/material/Alert";
 import Stack from "@mui/material/Stack";
-import axios from "axios";
 import Box from "@mui/material/Box";
 import { useValidName } from "./validNamesHook.js";
 import { validateRegister } from "./validateRegister.js";
@@ -35,62 +33,9 @@ export default function RegisterForm() {
     setOpenReg(false);
     reset();
   };
+
   let dataName = useValidName();
-  // axios
-  //   .get("http://localhost:3001/users")
-  //   .then((res) => {
-  //     res.data.forEach((item) => {
-  //       namesValid.push(item.name);
-  //     });
-  //   })
-  //   .catch((error) => {
-  //     console.log(error);
-  //     return null;
-  //   });
 
-  //   const validNewName = (name) => {
-  //   let validname = namesValid.findIndex((item) => item === name);
-  //   if (validname === -1) {
-  //     return true;
-  //   } else {
-  //     return false;
-  //   }
-  // };
-  // const onSubmit = async (data) => {
-  //   if (
-  //     validateEmail(data.email) &&
-  //     validatePass(data.password, data.confirmPass) &&
-  //     validNewName(data.firstName)
-  //   ) {
-  //     handleClose();
-  //     setValid(false);
-  //     getInfoUser(data.firstName, data.password, data.email);
-  //     reset();
-  //     setAlertReg(true);
-  //     setTimeout(() => {
-  //       setAlertReg(false);
-  //     }, 2000);
-  //   } else {
-  //     setValid(true);
-  //     console.log("Тут ошибка!");
-  //   }
-  // };
-
-  // const validateEmail = (email) => {
-  //   return String(email)
-  //     .toLowerCase()
-  //     .match(
-  //       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-  //     );
-  // };
-
-  // const validatePass = (pass, confirmPass) => {
-  //   if (pass.length < 6 || !pass.match(/^\s*(\w+)\s*$/)) {
-  //     return false;
-  //   } else {
-  //     return pass === confirmPass ? true : false;
-  //   }
-  // };
   return (
     <>
       {alertReg ? (

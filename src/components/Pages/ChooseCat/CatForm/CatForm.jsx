@@ -97,6 +97,7 @@ export default function CatForm({
       setOpen(false);
     }
   }
+
   const handleClickbooked = (Transition) => () => {
     togglebooked();
     ToggleCheckBox();
@@ -126,6 +127,7 @@ export default function CatForm({
   const preloader = () => {
     setLoading(true);
   };
+
   return (
     <>
       <Card sx={{ maxWidth: 345 }} id={`${id}`}>
